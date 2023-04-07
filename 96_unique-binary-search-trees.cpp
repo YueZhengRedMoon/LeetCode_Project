@@ -21,9 +21,9 @@ public:
                 dp[i] += dp[j] * dp[i - 1 - j];
             }
             dp[i] *= 2;
-            if ((i - 1) % 2 != 0)
+            if ((i - 1) % 2 == 0)
             {
-                dp[i] -= dp[(i - 1) / 2];
+                dp[i] -= dp[(i - 1) / 2] * dp[(i - 1) / 2];
             }
         }
         for (int i = 0; i <= n; ++i)
