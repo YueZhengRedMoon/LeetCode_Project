@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 class Solution
 {
@@ -37,6 +38,10 @@ public:
                 {
                     return true;
                 }
+                if (nums[i] > target)
+                {
+                    return false;
+                }
             }
         }
 
@@ -62,6 +67,35 @@ public:
             }
         }
         return false;
+    }
+};
+
+class Solution2
+{
+public:
+    bool canPartition(std::vector<int> &nums)
+    {
+        int sum = 0;
+        sum = std::accumulate(nums.begin(), nums.end(), 0);
+
+        if (sum % 2 != 0)
+        {
+            return false;
+        }
+
+        int target = sum / 2;
+        // dp[j]:对于容量为j的背包，最多能放多大价值的物品
+        std::vector<int> dp(target + 1, 0);
+
+        for (int i = 0; i < nums.size(); ++i)
+        {
+            for (int j = target; j >= nums[i]; --j)
+            {
+                dp[j] = std::max(dp[j], dp[j - nums[i]] + nums[i]);
+            }
+        }
+
+        return dp[target] == target;
     }
 };
 
