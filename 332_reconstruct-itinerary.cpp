@@ -5,70 +5,49 @@
 #include <unordered_map>
 #include <map>
 
-/** 错误 */
+
 class Solution
 {
 public:
     std::vector<std::string> findItinerary(std::vector<std::vector<std::string>> &tickets)
     {
-        std::sort(tickets.begin(), tickets.end(), less);
-
-        std::unordered_map<int, int> startIndex;
-        int lastKey = 0;
-        for (int i = 0; i < tickets.size(); ++i)
+        for (const auto& ticket : tickets)
         {
-            int key = getKey(tickets[i][0]);
-            if (key != lastKey)
-            {
-                startIndex[key] = i;
-            }
-            lastKey = key;
+            ++targets[ticket[0]][ticket[1]];
         }
 
         std::vector<std::string> result = {"JFK"};
-        std::vector<bool> used(tickets.size(), false);
-        int index = startIndex[getKey("JFK")];
-        int usedNums = 0;
-        while (usedNums < tickets.size())
-        {
-            int targetKey = getKey(tickets[index][1]);
-            if (!used[index] && (startIndex.find(targetKey) != startIndex.end() || usedNums + 1 == tickets.size()))
-            {
-                result.push_back(tickets[index][1]);
-                used[index] = true;
-                ++usedNums;
-                index = startIndex[getKey(tickets[index][1])];
-            }
-            else
-            {
-                if (index + 1 < tickets.size())
-                {
-                    ++index;
-                }
-                else
-                {
-                    index = startIndex[getKey(tickets[index][1])];
-                }
-            }
-        }
-
+        backtracking(tickets.size() + 1, result);
         return result;
     }
 
 private:
-    static bool less(const std::vector<std::string> &lhs, const std::vector<std::string> &rhs)
-    {
-        int result = lhs[0].compare(rhs[0]);
-        if (result == 0)
-        {
-            result = lhs[1].compare(rhs[1]);
-        }
-        return result < 0;
-    }
+    /** 出发机场 <目的机场，机票数> */
+    std::unordered_map<std::string, std::map<std::string, int, std::less<>>> targets;
 
-    inline int getKey(const std::string &str)
+    bool backtracking(int ticketsNum, std::vector<std::string> &result)
     {
-        return str[0] * 0x10000 + str[1] * 0x100 + str[2];
+        if (result.size() == ticketsNum)
+        {
+            return true;
+        }
+
+        for (auto &target : targets[result.back()])
+        {
+            if (target.second > 0)
+            {
+                result.push_back(target.first);
+                --target.second;
+                if (backtracking(ticketsNum, result))
+                {
+                    return true;
+                }
+                ++target.second;
+                result.pop_back();
+            }
+        }
+
+        return false;
     }
 };
 
@@ -124,12 +103,19 @@ int main()
                                                      {"ADL","EZE"},{"ADL","EZE"},{"EZE","ADL"},{"AXA","EZE"},
                                                      {"AUA","AXA"},{"JFK","AXA"},{"AXA","AUA"},{"AUA","ADL"},
                                                      {"ANU","EZE"},{"TIA","ADL"},{"EZE","ANU"},{"AUA","ANU"}};
-    Solution2 solution;
-    std::vector<std::string> result = solution.findItinerary(tickets);
-    for (const auto& str : result)
+    Solution2 solution2;
+    std::vector<std::string> result2 = solution2.findItinerary(tickets);
+    for (const auto& str : result2)
     {
         std::cout << str << ' ';
     }
     std::cout << std::endl;
+
+    Solution solution1;
+    std::vector<std::string> result1 = solution1.findItinerary(tickets);
+    for (const auto& str : result1)
+    {
+        std::cout << str << ' ';
+    }
     return 0;
 }

@@ -32,3 +32,4 @@ add_executable(416_partition-equal-subset-sum 416_partition-equal-subset-sum.cpp
 add_executable(494_target-sum 494_target-sum.cpp)
 add_executable(474_ones-and-zeroes 474_ones-and-zeroes.cpp)
 add_executable(332_reconstruct-itinerary 332_reconstruct-itinerary.cpp)
+add_executable(51_n-queens 51_n-queens.cpp)
