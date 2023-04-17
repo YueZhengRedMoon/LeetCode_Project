@@ -64,7 +64,7 @@ public:
                     {
                         current->val = 2;  // 在current放摄像机
                     }
-                        // 右孩子放置了摄像机
+                    // 右孩子放置了摄像机
                     else if (current->right->val == 2)
                     {
                         current->val = std::max(1, current->val);   // current被监控到
