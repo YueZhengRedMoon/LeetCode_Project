@@ -59,6 +59,33 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    int rob(TreeNode* root)
+    {
+        std::pair<int, int> result = robTree(root);
+        return std::max(result.first, result.second);
+    }
+
+private:
+    std::pair<int, int> robTree(TreeNode *current)
+    {
+        if (current == nullptr)
+            return {0, 0};
+
+        std::pair<int, int> left = robTree(current->left);
+        std::pair<int, int> right = robTree(current->right);
+
+        // 偷current
+        int robCurrent = current->val + left.second + right.second;
+        // 不偷current
+        int notRobCurrent = std::max(left.first, left.second) + std::max(right.first, right.second);
+
+        return {robCurrent, notRobCurrent};
+    }
+};
+
 int main()
 {
     std::cout << "For Kirie" << std::endl;
