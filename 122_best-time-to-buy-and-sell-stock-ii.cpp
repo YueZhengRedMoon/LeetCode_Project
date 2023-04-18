@@ -64,6 +64,27 @@ public:
     }
 };
 
+/** 动态规划做法 */
+class Solution3
+{
+public:
+    int maxProfit(std::vector<int> &prices)
+    {
+        // dp[i].first:第i天持有股票时的最大利润
+        // dp[i].second:第i天不持有股票时的最大利润
+        std::vector<std::pair<int, int>> dp(2);
+        dp[0].first = -prices[0];
+
+        for (int i = 1; i < prices.size(); ++i)
+        {
+            dp[i % 2].first = std::max(dp[(i - 1) % 2].second - prices[i], dp[(i - 1) % 2].first);
+            dp[i % 2].second = std::max(dp[(i - 1) % 2].first + prices[i], dp[(i - 1) % 2].second);
+        }
+
+        return dp[(prices.size() - 1) % 2].second;
+    }
+};
+
 
 int main()
 {
