@@ -74,15 +74,6 @@ public:
     }
 };
 
-class Solution2
-{
-public:
-    int makeArrayIncreasing(std::vector<int> &arr1, std::vector<int> &arr2)
-    {
-
-    }
-};
-
 int main()
 {
     std::vector<int> arr1 = {1, 5, 3, 6, 7};
