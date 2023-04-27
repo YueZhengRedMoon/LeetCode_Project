@@ -42,3 +42,4 @@ add_executable(309_best-time-to-buy-and-sell-stock-with-cooldown 309_best-time-t
 add_executable(1187_make-array-strictly-increasing 1187_make-array-strictly-increasing.cpp)
 add_executable(84_largest-rectangle-in-histogram 84_largest-rectangle-in-histogram.cpp)
 add_executable(1031_maximum-sum-of-two-non-overlapping-subarrays 1031_maximum-sum-of-two-non-overlapping-subarrays.cpp)
+add_executable(533_optimal-division 533_optimal-division.cpp)
