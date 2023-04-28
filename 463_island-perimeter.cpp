@@ -34,11 +34,11 @@ private:
         int perimeter = 0;
         std::queue<std::pair<int, int>> queue;
         queue.push({x, y});
+        visited[x][y] = 1;
         while (!queue.empty())
         {
             std::pair<int, int> current = queue.front();
             queue.pop();
-            visited[current.first][current.second] = true;
 
             for (int i = 0; i < 4; ++i)
             {
@@ -50,6 +50,7 @@ private:
                     if (!visited[nextX][nextY])
                     {
                         queue.push({nextX, nextY});
+                        visited[nextX][nextY] = 1;
                     }
                 }
                 else
