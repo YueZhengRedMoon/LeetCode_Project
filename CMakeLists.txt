@@ -43,3 +43,4 @@ add_executable(1187_make-array-strictly-increasing 1187_make-array-strictly-incr
 add_executable(84_largest-rectangle-in-histogram 84_largest-rectangle-in-histogram.cpp)
 add_executable(1031_maximum-sum-of-two-non-overlapping-subarrays 1031_maximum-sum-of-two-non-overlapping-subarrays.cpp)
 add_executable(533_optimal-division 533_optimal-division.cpp)
+add_executable(2602_minimum-operations-to-make-all-array-elements-equal 2602_minimum-operations-to-make-all-array-elements-equal.cpp)
