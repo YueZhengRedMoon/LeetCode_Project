@@ -68,6 +68,46 @@ public:
     }
 };
 
+class Solution3
+{
+public:
+    bool equalFrequency(std::string word)
+    {
+        std::unordered_map<char, int> group;
+        for (char c : word)
+        {
+            ++group[c];
+        }
+
+        std::vector<int> frequency;
+        frequency.reserve(group.size());
+        for (auto it = group.begin(); it != group.end(); ++it)
+        {
+            frequency.push_back(it->second);
+        }
+
+        std::sort(frequency.begin(), frequency.end());
+        if (frequency.size() == 1)
+        {
+            return true;
+        }
+        else if (frequency[0] == 1 &&
+                 std::equal(frequency.begin() + 2, frequency.end(), frequency.begin() + 1))
+        {
+            return true;
+        }
+        else if (frequency.back() == frequency[frequency.size() - 2] + 1 &&
+                 std::equal(frequency.begin() + 1, frequency.end() - 1, frequency.begin()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+};
+
 int main()
 {
     std::cout << "For Kirie" << std::endl;
