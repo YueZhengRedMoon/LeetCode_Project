@@ -45,3 +45,4 @@ add_executable(1031_maximum-sum-of-two-non-overlapping-subarrays 1031_maximum-su
 add_executable(533_optimal-division 533_optimal-division.cpp)
 add_executable(2602_minimum-operations-to-make-all-array-elements-equal 2602_minimum-operations-to-make-all-array-elements-equal.cpp)
 add_executable(2615_sum-of-distances 2615_sum-of-distances.cpp)
+add_executable(673_number-of-longest-increasing-subsequence 673_number-of-longest-increasing-subsequence.cpp)
