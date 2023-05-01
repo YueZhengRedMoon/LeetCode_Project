@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <functional>
 #include "debug.h"
 
 class Solution
@@ -57,9 +58,67 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    int findNumberOfLIS(std::vector<int> &nums)
+    {
+        // dp[i]:所有长度为i的递增子序列的末尾元素，dp[i]中的元素是递减的，dp[i].back()是递增的
+        // count[i][j]:长度为i，末尾元素为dp[i][j]的递增子序列的数量
+        std::vector<std::vector<int>> dp, count;
+
+        for (int num : nums)
+        {
+            int i = binarySearch(dp.size(), [&](int mid){return dp[mid].back() >= num;});
+            int c = 1;
+            if (i > 0)
+            {
+                int k = binarySearch(dp[i - 1].size(), [&](int mid){return dp[i - 1][mid] < num;});
+                c = count[i - 1].back() - count[i - 1][k];
+            }
+            if (i == dp.size())
+            {
+                dp.push_back({num});
+                count.push_back({0, c});
+            }
+            else
+            {
+                dp[i].push_back(num);
+                count[i].push_back(count[i].back() + c);
+            }
+        }
+
+        std::cout << "dp:" << std::endl;
+        debug::printVector2D(dp);
+        std::cout << "count:" << std::endl;
+        debug::printVector2D(count);
+
+        return count.back().back();
+    }
+
+private:
+    int binarySearch(int n, const std::function<bool(int)> &comp)
+    {
+        int left  = 0, right = n;
+        while (left < right)
+        {
+            int mid = (left + right) / 2;
+            if (comp(mid))
+            {
+                right = mid;
+            }
+            else
+            {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+};
+
 int main()
 {
-    Solution solution;
+    Solution2 solution;
     std::vector<int> nums = {1, 2, 4, 3, 5, 4, 7, 2};
     std::vector<int> nums2 = {1,1,1,2,2,2,3,3,3};
     int count = solution.findNumberOfLIS(nums);
