@@ -47,3 +47,4 @@ add_executable(2602_minimum-operations-to-make-all-array-elements-equal 2602_min
 add_executable(2615_sum-of-distances 2615_sum-of-distances.cpp)
 add_executable(673_number-of-longest-increasing-subsequence 673_number-of-longest-increasing-subsequence.cpp)
 add_executable(1425_constrained-subsequence-sum 1425_constrained-subsequence-sum.cpp)
+add_executable(264_ugly-number-ii 264_ugly-number-ii.cpp)
