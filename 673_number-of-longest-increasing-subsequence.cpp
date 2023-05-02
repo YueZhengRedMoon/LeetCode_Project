@@ -67,12 +67,19 @@ public:
         // count[i][j]:长度为i，末尾元素为dp[i][j]的递增子序列的数量
         std::vector<std::vector<int>> dp, count;
 
+        // 要计算count[i][j]，就要考虑dp[i-1]和count[i-1]
+        // 因为dp[i-1]中的元素是递减的，所以可以用二分找到第一个小于num的dp[i-1][k]
+        // 此时有dp[i-1][k]~dp[i-1].back()的都 < num，则num可以接在这些序列后面
+        // 因此有count[i][j] = count[i-1][k] + count[i-1][k+1] + ... + count[i-1].back()，而这个可以由前缀和计算出来
         for (int num : nums)
         {
+            // 找到插入位置
+            // 找到第一个结尾元素大于等于num的序列dp[i]，则num可以插入到长度为i的子序列中
             int i = binarySearch(dp.size(), [&](int mid){return dp[mid].back() >= num;});
             int c = 1;
             if (i > 0)
             {
+                // 计算长度为i的子序列的数量
                 int k = binarySearch(dp[i - 1].size(), [&](int mid){return dp[i - 1][mid] < num;});
                 c = count[i - 1].back() - count[i - 1][k];
             }
