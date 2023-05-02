@@ -37,6 +37,7 @@ public:
     }
 };
 
+/** 最小堆 */
 class Solution2
 {
 public:
@@ -68,6 +69,40 @@ public:
         }
 
         return static_cast<int>(ugly);
+    }
+};
+
+class Solution3
+{
+public:
+    int nthUglyNumber(int n)
+    {
+        std::vector<int> dp(n + 1);
+        dp[1] = 1;
+
+        int p2 = 1, p3 = 1, p5 = 1;
+        for (int i = 2; i <= n; ++i)
+        {
+            int num2 = dp[p2] * 2, num3 = dp[p3] * 3, num5 = dp[p5] * 5;
+            dp[i] = std::min(std::min(num2, num3), num5);
+            if (dp[i] == num2)
+            {
+                // dp[p2] * 2 == dp[i] --> dp[p2+1] * 2 >= dp[i+1]
+                ++p2;
+            }
+            if (dp[i] == num3)
+            {
+                // dp[p3] * 3 == dp[3] --> dp[p3+1] * 3 >= dp[i+1]
+                ++p3;
+            }
+            if (dp[i] == num5)
+            {
+                // dp[p5] * 5 == dp[5] --> dp[p5+1] * 5 >= dp[i+1]
+                ++p5;
+            }
+        }
+
+        return dp[n];
     }
 };
 
