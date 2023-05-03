@@ -49,3 +49,4 @@ add_executable(673_number-of-longest-increasing-subsequence 673_number-of-longes
 add_executable(1425_constrained-subsequence-sum 1425_constrained-subsequence-sum.cpp)
 add_executable(264_ugly-number-ii 264_ugly-number-ii.cpp)
 add_executable(313_super-ugly-number 313_super-ugly-number.cpp)
+add_executable(2106_maximum-fruits-harvested-after-at-most-k-steps 2106_maximum-fruits-harvested-after-at-most-k-steps.cpp)
