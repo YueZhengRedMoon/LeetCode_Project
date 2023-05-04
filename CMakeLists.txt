@@ -50,3 +50,4 @@ add_executable(1425_constrained-subsequence-sum 1425_constrained-subsequence-sum
 add_executable(264_ugly-number-ii 264_ugly-number-ii.cpp)
 add_executable(313_super-ugly-number 313_super-ugly-number.cpp)
 add_executable(740_delete-and-earn 740_delete-and-earn.cpp)
+add_executable(2106_maximum-fruits-harvested-after-at-most-k-steps 2106_maximum-fruits-harvested-after-at-most-k-steps.cpp)

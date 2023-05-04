@@ -130,9 +130,96 @@ private:
     }
 };
 
+/** 官方二分查找 */
+class Solution2
+{
+public:
+    int maxTotalFruits(std::vector<std::vector<int>> &fruits, int startPos, int k)
+    {
+        // 先往左走x步，再往右走k - x步，此时移动区间是[startPos - x, startPost + k - 2x)
+        // 先往右走x步，再往左走k - x步，此时移动区间是[startPos - k + 2x, startPos + x)
+        int n = fruits.size();
+        std::vector<int> sum(n + 1, 0); // 从左到右水果数量的前缀和
+        std::vector<int> indices(n);            // 每个水果的坐标
+        for (int i = 0; i < n; ++i)
+        {
+            sum[i + 1] = sum[i] + fruits[i][1];
+            indices[i] = fruits[i][0];
+        }
+
+        // 以fruits = {{0,9},{4,1},{5,7},{6,2},{7,4},{10,9}}为例
+        // 下标      0       1       2       3       4      5       6
+        // sum      0       9       10      17      19     23      32
+        // indices   0      4       5       6       7       10      -
+        // 当区间为[4, 7]时, start = 1, end = 5, 可以取得的水果数为sum[5]-sum[1] = 23 - 9 = 14
+
+        int ans = 0;
+        for (int x = 0; x <= k / 2; ++x)    // 如果要折返，往一个方向最多走k / 2步，否则就回不到起点
+        {
+            // 向左走x步，再向右走k-x步
+            int y = k - 2 * x;  // 回到起点后剩余的步数
+            int left = startPos - x;
+            int right = startPos + y;
+            // 找到第一个大于等于区间左端点的水果坐标的索引
+            int start = std::lower_bound(indices.begin(), indices.end(), left) - indices.begin();
+            // 找到第一个大于区间右端点的水果坐标的索引
+            int end = std::upper_bound(indices.begin(), indices.end(), right) - indices.begin();
+            // 计算区间内可以拿到的水果总数
+            ans = std::max(ans, sum[end] - sum[start]);
+
+            // 向右走x步，再向左走k - x步
+            left = startPos - y;
+            right = startPos + x;
+            start = std::lower_bound(indices.begin(), indices.end(), left) - indices.begin();
+            end = std::upper_bound(indices.begin(), indices.end(), right) - indices.begin();
+            ans = std::max(ans, sum[end] - sum[start]);
+        }
+        return ans;
+    }
+};
+
+/** 滑动窗口 */
+class Solution3
+{
+public:
+    int maxTotalFruits(std::vector<std::vector<int>> &fruits, int startPos, int k)
+    {
+        int left = 0, right = 0, n = fruits.size(), sum = 0, ans = 0;
+
+        // step(left, right):从startPos出发可以覆盖区间[left, right]的最少移动步数
+        auto step = [&](int left, int right) -> int {
+            if (fruits[right][0] <= startPos)
+                return startPos - fruits[left][0];
+            else if (fruits[left][0] >= startPos)
+                return fruits[right][0] - startPos;
+            else
+                return std::min(std::abs(fruits[right][0] - startPos), std::abs(startPos - fruits[left][0]))
+                        + fruits[right][0] - fruits[left][0];
+        };
+
+        // 每次固定住窗口有边界
+        while (right < n)
+        {
+            sum += fruits[right][1];
+            // 移动左边界
+            while (left <= right && step(left, right) > k)
+            {
+                std::cout << "step(" << left << ", " << right << ") = " << step(left, right) << std::endl;
+                sum -= fruits[left][1];
+                ++left;
+            }
+
+            ans = std::max(ans, sum);
+            ++right;
+        }
+
+        return ans;
+    }
+};
+
 int main()
 {
-    Solution solution;
+    Solution3 solution;
     std::vector<std::vector<int>> fruits = {{0,9},{4,1},{5,7},{6,2},{7,4},{10,9}};
     std::vector<std::vector<int>> fruits2 = {{0,7},{7,4},{9,10},{12,6},{14,8},{16,5},{17,8},{19,4},{20,1},{21,3},{24,3},
                                              {25,3},{26,1},{28,10},{30,9},{31,6},{32,1},{37,5},{40,9}};
