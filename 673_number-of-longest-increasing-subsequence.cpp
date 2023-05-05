@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <functional>
+#include <unordered_map>
 #include "debug.h"
 
 class Solution
@@ -122,6 +123,52 @@ private:
         return left;
     }
 };
+
+/*
+class Solution3
+{
+public:
+    int findNumberOfLIS(std::vector<int> &nums)
+    {
+        numsSize = nums.size();
+        std::vector<int> numsCopy = nums;
+        std::sort(numsCopy.begin(), numsCopy.end());
+        std::unordered_map<int, int> map;
+        for (int i = 0, index = 1; i < numsSize; ++i)
+        {
+            if (map.find(numsCopy[i]) == map.end())
+            {
+                map[numsCopy[i]] = index++; // 存储nums中每种数第一次出现的位置
+            }
+        }
+
+        tree.resize(numsSize);
+        for (int i = 0; i < numsSize; ++i)
+        {
+            int x = map[nums[i]];
+
+        }
+    }
+
+private:
+    int numsSize;
+    std::vector<std::pair<int, int>> tree;
+
+    std::pair<int, int> query(int x)
+    {
+        int len = 0, cnt = 0;
+        for (int i = x; i > 0; i -= lowbit(i))
+        {
+
+        }
+    }
+
+    inline int lowbit(int x)
+    {
+        return x & -x;
+    }
+};
+*/
 
 int main()
 {
