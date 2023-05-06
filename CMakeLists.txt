@@ -54,3 +54,4 @@ add_executable(2106_maximum-fruits-harvested-after-at-most-k-steps 2106_maximum-
 add_executable(64_minimum-path-sum 64_minimum-path-sum.cpp)
 add_executable(514_freedom-trail 514_freedom-trail.cpp)
 add_executable(354_russian-doll-envelopes 354_russian-doll-envelopes.cpp)
+add_executable(368_largest-divisible-subset 368_largest-divisible-subset.cpp)
