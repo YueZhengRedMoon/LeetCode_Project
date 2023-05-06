@@ -64,6 +64,30 @@ namespace kirie
         }
         return left - 1;
     }
+
+    template <typename T>
+    T max(const T& t)
+    {
+        return t;
+    }
+
+    template <typename T, typename... Args>
+    T max(const T& t, const Args&... args)
+    {
+        return std::max(t, max(args...));
+    }
+
+    template <typename T>
+    T min(const T& t)
+    {
+        return t;
+    }
+
+    template <typename T, typename... Args>
+    T min(const T& t, const Args&... args)
+    {
+        return std::min(t, min(args...));
+    }
 }
 
 #endif //__LEET_CODE_PROJECT_ALGORITHM_H

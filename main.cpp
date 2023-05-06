@@ -15,5 +15,7 @@ int main()
         return vec[mid] >= 16;
     });
     std::cout << "minIndex = " << minIndex << ", vec[minIndex] = " << vec[minIndex] << std::endl;
+
+    std::cout << kirie::max(23, 47, 17, 98, 20) << std::endl;
     return 0;
 }
