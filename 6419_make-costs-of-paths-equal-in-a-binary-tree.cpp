@@ -55,6 +55,22 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    int minIncrements(int n, std::vector<int> &cost)
+    {
+        int ans = 0;
+        for (int i = n / 2; i > 0; --i)
+        {
+            ans += std::abs(cost[2 * i - 1] - cost[2 * i]);
+            cost[i - 1] += std::max(cost[2 * i - 1], cost[2 * i]);
+        }
+
+        return ans;
+    }
+};
+
 int main()
 {
     std::cout << "For Kirie!" << std::endl;
