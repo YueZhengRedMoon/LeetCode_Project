@@ -187,6 +187,39 @@ public:
                 int playerIndex = index(player);
                 int boxIndex = index(box);
 
+//                if (dp[playerIndex][boxIndex] > 0)
+//                {
+//                    std::cout << "step = " << dp[playerIndex][boxIndex] << std::endl;
+//                    for (int i = 0; i < m; ++i)
+//                    {
+//                        for (int j = 0; j < n; ++j)
+//                        {
+//                            if (i == player.x && j == player.y)
+//                            {
+//                                std::cout << "P\t";
+//                            }
+//                            else if (i == box.x && j == box.y)
+//                            {
+//                                std::cout << "B\t";
+//                            }
+//                            else if (grid[i][j] == 'T')
+//                            {
+//                                std::cout << grid[i][j] <<  "\t";
+//                            }
+//                            else if(grid[i][j] == '#')
+//                            {
+//                                std::cout << "#\t";
+//                            }
+//                            else
+//                            {
+//                                std::cout << ".\t";
+//                            }
+//                        }
+//                        std::cout << std::endl;
+//                    }
+//                    std::cout << '\n' << std::endl;
+//                }
+
                 // 箱子已经被推到目标处
                 if (grid[box.x][box.y] == 'T')
                 {
@@ -218,7 +251,7 @@ public:
                         }
 
                         dp[playerNextIndex][boxNextIndex] = dp[playerIndex][boxIndex] + 1;
-                        queue2.emplace(playerNext, boxNext);
+                        queue1.emplace(playerNext, boxNext);
                     }
                     // 下一个位置不是箱子
                     else
@@ -244,22 +277,35 @@ public:
 int main()
 {
     Solution2 solution;
-    std::vector<std::vector<char>> grid = {{'#','#','#','#','#','#'},
-                                           {'#','T','#','#','#','#'},
-                                           {'#','.','.','B','.','#'},
-                                           {'#','.','#','#','.','#'},
-                                           {'#','.','.','.','S','#'},
-                                           {'#','#','#','#','#','#'}};
-    int result = solution.minPushBox(grid);
-    std::cout << result << std::endl;
+//    std::vector<std::vector<char>> grid = {{'#','#','#','#','#','#'},
+//                                           {'#','T','#','#','#','#'},
+//                                           {'#','.','.','B','.','#'},
+//                                           {'#','.','#','#','.','#'},
+//                                           {'#','.','.','.','S','#'},
+//                                           {'#','#','#','#','#','#'}};
+//    int result = solution.minPushBox(grid);
+//    std::cout << result << std::endl;
+//
+//    std::vector<std::vector<char>> grid2 = {{'#','.','.','#','#','#','#','#'},
+//                                            {'#','.','.','T','#','.','.','#'},
+//                                            {'#','.','.','.','#','B','.','#'},
+//                                            {'#','.','.','.','.','.','.','#'},
+//                                            {'#','.','.','.','#','.','S','#'},
+//                                            {'#','.','.','#','#','#','#','#'}};
+//    int result2 = solution.minPushBox(grid2);
+//    std::cout << result2 << std::endl;
 
-    std::vector<std::vector<char>> grid2 = {{'#','.','.','#','#','#','#','#'},
-                                            {'#','.','.','T','#','.','.','#'},
-                                            {'#','.','.','.','#','B','.','#'},
-                                            {'#','.','.','.','.','.','.','#'},
-                                            {'#','.','.','.','#','.','S','#'},
-                                            {'#','.','.','#','#','#','#','#'}};
-    int result2 = solution.minPushBox(grid2);
-    std::cout << result2 << std::endl;
+    std::vector<std::vector<char>> grid3 = {{'.','.','#','.','.','.','.','.','.','.'},
+                                            {'.','#','.','#','B','#','.','#','.','.'},
+                                            {'.','#','.','.','.','.','.','.','T','.'},
+                                            {'#','.','.','.','.','.','.','.','.','.'},
+                                            {'.','.','.','.','.','.','.','.','.','#'},
+                                            {'.','.','.','.','.','.','.','.','#','.'},
+                                            {'.','.','.','#','.','.','#','#','.','.'},
+                                            {'.','.','.','.','#','.','.','#','.','.'},
+                                            {'.','#','.','S','.','.','.','.','.','.'},
+                                            {'#','.','.','#','.','.','.','.','.','#'}};
+    int result3 = solution.minPushBox(grid3);
+    std::cout << result3 << std::endl;
     return 0;
 }
