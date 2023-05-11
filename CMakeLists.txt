@@ -59,3 +59,4 @@ add_executable(6418_number-of-adjacent-elements-with-the-same-color 6418_number-
 add_executable(1263_minimum-moves-to-move-a-box-to-their-target-location 1263_minimum-moves-to-move-a-box-to-their-target-location.cpp)
 add_executable(41_first-missing-positive 41_first-missing-positive.cpp)
 add_executable(978_longest-turbulent-subarray 978_longest-turbulent-subarray.cpp)
+add_executable(1016_binary-string-with-substrings-representing-1-to-n 1016_binary-string-with-substrings-representing-1-to-n.cpp)
