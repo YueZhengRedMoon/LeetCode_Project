@@ -15,8 +15,8 @@ public:
             auto it = std::lower_bound(numbers.begin() + i + 1, numbers.end(), target - numbers[i]);
             if (it != numbers.end() && numbers[i] + *it == target)
             {
-                ans[0] = i;
-                ans[1] = it - numbers.begin();
+                ans[0] = i + 1;
+                ans[1] = it - numbers.begin() + 1;
                 break;
             }
         }
