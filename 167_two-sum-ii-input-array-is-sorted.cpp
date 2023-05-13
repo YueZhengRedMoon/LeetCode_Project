@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "debug.h"
 
 class Solution
 {
@@ -24,8 +25,38 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    std::vector<int> twoSum(std::vector<int> &numbers, int target)
+    {
+        int left = 0, right = numbers.size() - 1;
+        while (numbers[left] + numbers[right] != target)
+        {
+            if (numbers[left] + numbers[right] > target)
+            {
+                do
+                {
+                    --right;
+                } while (numbers[right] == numbers[right + 1]);
+            }
+            else
+            {
+                do
+                {
+                    ++left;
+                } while (numbers[left] == numbers[left - 1]);
+            }
+        }
+        return {left + 1, right + 1};
+    }
+};
+
 int main()
 {
-    std::cout << "For Kirie" << std::endl;
+    Solution2 solution;
+    std::vector<int> numbers = {2, 7, 11, 15};
+    std::vector<int> ans = solution.twoSum(numbers, 9);
+    debug::printVector(ans);
     return 0;
 }
