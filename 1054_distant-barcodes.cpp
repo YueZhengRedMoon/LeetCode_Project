@@ -45,6 +45,46 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    std::vector<int> rearrangeBarcodes(std::vector<int> &barcodes)
+    {
+        int len = barcodes.size();
+        if (len < 2)
+        {
+            return barcodes;
+        }
+
+        std::unordered_map<int, int> counts;
+        int maxCount = 0;
+        for (int code : barcodes)
+        {
+            maxCount = std::max(maxCount, ++counts[code]);
+        }
+
+        int evenIndex = 0, oddIndex = 1, halfLen = len / 2;
+        std::vector<int> ans(len);
+        for (auto &[x, cx] : counts)
+        {
+            while (cx > 0 && cx <= halfLen && oddIndex < len)
+            {
+                ans[oddIndex] = x;
+                --cx;
+                oddIndex += 2;
+            }
+            while (cx > 0)
+            {
+                ans[evenIndex] = x;
+                --cx;
+                evenIndex += 2;
+            }
+        }
+
+        return ans;
+    }
+};
+
 int main()
 {
     std::cout << "For Kirie" << std::endl;
