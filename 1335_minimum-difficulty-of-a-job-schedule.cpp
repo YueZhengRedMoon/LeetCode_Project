@@ -1,6 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <cstring>
+#include <functional>
 #include <limits>
+#include <algorithm>
+#include "debug.h"
 
 class Solution
 {
@@ -13,30 +17,132 @@ public:
             return -1;
         }
 
-        const int inf = std::numeric_limits<int>::max();
-        // dp[i][j]:将0~i的工作放到第0~j天做，所需的最小工作量
-        std::vector<std::vector<int>> dp(n, std::vector<int>(d, inf));
+        const int inf = 0x3f3f3f3f;
+        // dp[i][j]:前i+1天完成前j项工作的最小难度
+        std::vector<std::vector<int>> dp(d, std::vector<int>(n, inf));
 
-        dp[0][0] = jobDifficulty[0];
-        for (int i = 1; i < n; ++i)
+        int max = 0;
+        for (int i = 0; i < n; ++i)
         {
-            dp[i][0] = std::max(dp[i - 1][0], jobDifficulty[i]);
+            max = std::max(max, jobDifficulty[i]);
+            dp[0][i] = max;
         }
 
         for (int i = 1; i < d; ++i)
         {
-            // 第j天开始最迟也得开始做第j个工作
-            // 且第j天不能做太多的工作从而导致导致后面会有一天空闲
-            for (int j = i; j < n && (n - j) >= (d - i); ++j)
+            for (int j = i; j < n; ++j)
             {
-
+                max = 0;
+                for (int k = j; k >= i; --k)
+                {
+                    max = std::max(max, jobDifficulty[k]);
+                    dp[i][j] = std::min(dp[i][j], dp[i - 1][k - 1] + max);
+                }
             }
         }
+
+        debug::printVector2D(dp, inf);
+
+        return dp[d - 1][n - 1];
     }
 };
 
+class Solution2
+{
+public:
+    int minDifficulty(std::vector<int> &jobDifficulty, int d)
+    {
+        int n = jobDifficulty.size();
+        if (n < d) return -1;
+
+        const int inf = 0x3f3f3f3f;
+        // dp[i][j]:前i+1天完成工作0~工作j需要的最少难度
+        std::vector<int> dp(n, inf);
+
+        // 初始化，第1天依次完成每个工作需要的最小难度
+        int max = 0;
+        for (int j = 0; j < n; ++j)
+        {
+            max = std::max(max, jobDifficulty[j]);
+            dp[j] = max;
+        }
+
+        // 遍历工作天数
+        for (int i = 1; i < d; ++i)
+        {
+            // 遍历从第i天开始的工作任务，第i天开始时至少要开始做第i个任务
+            for (int j = n - 1; j >= i; --j)
+            {
+                dp[j] = inf;
+                max = 0;
+                // 枚举从第k个任务到第j个任务中工作难度最大的任务，第k个任务到第j个任务在第i天做，前k-1个任务在前i-1天做
+                for (int k = j; k >= i; --k)
+                {
+                    max = std::max(max, jobDifficulty[k]);
+                    dp[j] = std::min(dp[j], dp[k - 1] + max);
+                }
+            }
+        }
+
+        return dp[n - 1];
+    }
+};
+
+/*
+class Solution2
+{
+public:
+    int minDifficulty(std::vector<int> &jobDifficulty, int d)
+    {
+        int n = jobDifficulty.size();
+        if (n < d) return -1;
+
+        int memo[d][n];
+        std::memset(memo, -1, sizeof(memo));    // -1表示还没有计算过
+        // dfs(i, j):用前i+1天完成工作0到工作j需要的最小难度
+        std::function<int(int, int)> dfs = [&](int i, int j) -> int {
+            int &res = memo[i][j];
+
+            // 之前已经计算过了
+            if (res != -1)
+                return res;
+            // 只有一天，必须完成所有工作
+            if (i == 0)
+            {
+                int max = 0;
+                for (int k = 0; k <= j; ++k)
+                {
+                    max = std::max(max, jobDifficulty[k]);
+                }
+                return res = max;
+            }
+
+            res = std::numeric_limits<int>::max();
+            int max = 0;
+            for (int k = j; k >= i; --k)
+            {
+                max = std::max(max, jobDifficulty[k]);  // 从jobDifficulty[k]到jobDifficulty[j]的最大值
+                res = std::min(res, dfs(i - 1, k - 1) + max);
+            }
+            return res;
+        };
+
+        return dfs(d - 1, n - 1);
+    }
+};
+*/
+
 int main()
 {
-    std::cout << "For Kirie" << std::endl;
+    Solution solution;
+    std::vector<int> jobDifficulty = {6,5,4,3,2,1};
+    int d = 2;
+    int result = solution.minDifficulty(jobDifficulty, d);
+    std::cout << result << std::endl;
+
+    std::vector<int> jobDifficulty2 = {11,111,22,222,33,333,44,444};
+    int d2 = 6;
+    int result2 = solution.minDifficulty(jobDifficulty2, d2);
+    std::cout << result2 << std::endl;
     return 0;
 }

@@ -65,3 +65,4 @@ add_executable(167_two-sum-ii-input-array-is-sorted 167_two-sum-ii-input-array-i
 add_executable(1066_campus-bikes-ii 1066_campus-bikes-ii.cpp)
 add_executable(11_container-with-most-water 11_container-with-most-water.cpp)
 add_executable(6433_maximum-number-of-moves-in-a-grid 6433_maximum-number-of-moves-in-a-grid.cpp)
+add_executable(1335_minimum-difficulty-of-a-job-schedule 1335_minimum-difficulty-of-a-job-schedule.cpp)

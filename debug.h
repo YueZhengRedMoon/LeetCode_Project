@@ -33,5 +33,25 @@ namespace debug
         }
     }
 
+    template<typename T>
+    void printVector2D(std::vector<std::vector<T>> vector2D, const T& inf, char split = ' ')
+    {
+        for (const auto &vector : vector2D)
+        {
+            for (const auto &value : vector)
+            {
+                if (value == inf)
+                {
+                    std::cout << "inf" << split;
+                }
+                else
+                {
+                    std::cout << value << split;
+                }
+
+            }
+            std::cout << std::endl;
+        }
+    }
 }
 #endif //__LEET_CODE_PROJECT_DEBUG_H
