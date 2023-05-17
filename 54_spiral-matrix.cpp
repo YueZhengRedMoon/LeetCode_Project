@@ -10,8 +10,7 @@ public:
         std::vector<int> ans(m * n);
         const int dir[4][2] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
         const int visited = 404;
-        int curDir = 0;
-        for (int i = 0, x = 0, y = 0; i < m * n; ++i)
+        for (int i = 0, x = 0, y = 0, curDir = 0; i < m * n; ++i)
         {
             ans[i] = matrix[x][y];
             matrix[x][y] = visited;
