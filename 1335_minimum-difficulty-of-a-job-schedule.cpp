@@ -4,6 +4,7 @@
 #include <functional>
 #include <limits>
 #include <algorithm>
+#include <stack>
 #include "debug.h"
 
 class Solution
@@ -88,6 +89,48 @@ public:
     }
 };
 
+class Solution3
+{
+public:
+    int minDifficulty(std::vector<int> &jobDifficulty, int d)
+    {
+        int n = jobDifficulty.size();
+        if (n < d) return -1;
+
+        std::vector<std::vector<int>> dp(d, std::vector<int>(n));
+
+        dp[0][0] = jobDifficulty[0];
+        for (int j = 1; j < n; ++j)
+        {
+            dp[0][j] = std::max(dp[0][j - 1], jobDifficulty[j]);
+        }
+
+        for (int i = 1; i < d; ++i)
+        {
+            // 栈顶表示第j个工作前面第一个难度大于第j个工作的难度的工作下标
+            // 左边第一个难度大于j的工作left[j]，从dp[i-1][left[j]+1]到dp[i-1][j-1]的最小值
+            std::stack<std::pair<int, int>> stack;
+            for (int j = i; j < n; ++j)
+            {
+                int min = dp[i - 1][j - 1];
+                while (!stack.empty() && jobDifficulty[stack.top().first] <= jobDifficulty[j])
+                {
+                    min = std::min(min, stack.top().second);
+                    stack.pop();
+                }
+                dp[i][j] = min + jobDifficulty[j];
+                if (!stack.empty())
+                {
+                    dp[i][j] = std::min(dp[i][j], dp[i][stack.top().first]);
+                }
+                stack.emplace(j, min);
+            }
+        }
+
+        return dp[d - 1][n - 1];
+    }
+};
+
 /*
 class Solution2
 {
@@ -134,7 +177,7 @@ public:
 
 int main()
 {
-    Solution solution;
+    Solution3 solution;
     std::vector<int> jobDifficulty = {6,5,4,3,2,1};
     int d = 2;
     int result = solution.minDifficulty(jobDifficulty, d);
