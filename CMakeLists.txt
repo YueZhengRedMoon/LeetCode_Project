@@ -70,3 +70,4 @@ add_executable(1277_count-square-submatrices-with-all-ones 1277_count-square-sub
 add_executable(48_rotate-image 48_rotate-image.cpp)
 add_executable(219_contains-duplicate-ii 219_contains-duplicate-ii.cpp)
 add_executable(57_insert-interval 57_insert-interval.cpp)
+add_executable(1079_letter-tile-possibilities 1079_letter-tile-possibilities.cpp)
