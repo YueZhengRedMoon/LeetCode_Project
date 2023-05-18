@@ -68,3 +68,4 @@ add_executable(6433_maximum-number-of-moves-in-a-grid 6433_maximum-number-of-mov
 add_executable(1335_minimum-difficulty-of-a-job-schedule 1335_minimum-difficulty-of-a-job-schedule.cpp)
 add_executable(1277_count-square-submatrices-with-all-ones 1277_count-square-submatrices-with-all-ones.cpp)
 add_executable(48_rotate-image 48_rotate-image.cpp)
+add_executable(219_contains-duplicate-ii 219_contains-duplicate-ii.cpp)
