@@ -69,3 +69,4 @@ add_executable(1335_minimum-difficulty-of-a-job-schedule 1335_minimum-difficulty
 add_executable(1277_count-square-submatrices-with-all-ones 1277_count-square-submatrices-with-all-ones.cpp)
 add_executable(48_rotate-image 48_rotate-image.cpp)
 add_executable(219_contains-duplicate-ii 219_contains-duplicate-ii.cpp)
+add_executable(57_insert-interval 57_insert-interval.cpp)
