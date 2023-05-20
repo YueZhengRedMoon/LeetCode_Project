@@ -26,6 +26,10 @@ public:
             // 对于每个水桶，计算其扩容几次后可以使得总操作次数最少
             int deltaX = 0; // 扩充的容量
             int minCount = calcCount(vat[i], bucket[i]);  // 对于水桶i最少需要操作几次
+            if (minCount <= maxCount)
+            {
+                continue;
+            }
             double x = sqrt(vat[i]) - bucket[i];
             int x1 = static_cast<int>(x);
             int x2 = x1 + 1;
