@@ -3,7 +3,9 @@
 #include <cmath>
 #include <algorithm>
 #include <limits>
+#include <queue>
 
+/** 错误 */
 class Solution
 {
 public:
@@ -97,6 +99,7 @@ public:
     }
 };
 
+/** 错误 */
 class Solution3
 {
 public:
@@ -137,6 +140,56 @@ public:
         }
 
         return ans + maxMinStoreCount;
+    }
+
+private:
+    /** 对于最低蓄水量为v水缸，容量为b的水桶，最少要倒多少次水 */
+    inline int calcStoreCount(int v, int b)
+    {
+        return (v / b) + (v % b == 0 ? 0 : 1);
+    }
+};
+
+class Solution4
+{
+public:
+    int storeWater(std::vector<int> &bucket, std::vector<int> &vat)
+    {
+        int n = bucket.size();
+        std::priority_queue<std::pair<int, int>> queue;
+        int count = 0;
+        for (int i = 0; i < n; ++i)
+        {
+            if (bucket[i] == 0 && vat[i])
+            {
+                ++count;
+                ++bucket[i];
+            }
+            if (vat[i] > 0)
+            {
+                queue.emplace(calcStoreCount(vat[i], bucket[i]), i);
+            }
+        }
+        if (queue.empty())
+        {
+            return 0;
+        }
+        int ans = std::numeric_limits<int>::max();
+        while (count < ans)
+        {
+            auto [v, i] = queue.top();
+            ans = std::min(ans, count + v);
+            if (v == 1)
+            {
+                break;
+            }
+            queue.pop();
+            int t = (vat[i] + v - 2) / (v - 1);
+            count += t - bucket[i];
+            bucket[i] = t;
+            queue.emplace(calcStoreCount(vat[i], bucket[i]), i);
+        }
+        return ans;
     }
 
 private:
