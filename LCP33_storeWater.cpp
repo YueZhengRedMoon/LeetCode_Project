@@ -1,74 +1,158 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <algorithm>
+#include <limits>
 
 class Solution
 {
 public:
     int storeWater(std::vector<int> &bucket, std::vector<int> &vat)
     {
-        int n = bucket.size();
         int ans = 0;
+        int n = bucket.size();
+        int maxMinStoreCount = 0;  // 将一个水桶的容量升级到最优后，最多需要的蓄水次数
+
         for (int i = 0; i < n; ++i)
         {
-            if (bucket[i] == 0 && vat[i] != 0)
+            if (vat[i] == 0) continue;
+            if (bucket[i] == 0)
             {
                 ++bucket[i];
                 ++ans;
             }
-        }
 
-        int maxCount = 0;   // 记录最多的倒水次数
-        for (int i = 0; i < n; ++i)
-        {
-            if (vat[i] == 0) continue;
-
-            // 对于每个水桶，计算其扩容几次后可以使得总操作次数最少
-            int deltaX = 0; // 扩充的容量
-            int minCount = calcCount(vat[i], bucket[i]);  // 对于水桶i最少需要操作几次
-            if (minCount <= maxCount)
+            int minStoreCount = calcStoreCount(vat[i], bucket[i]);
+            int minOpCount = minStoreCount;
+            if (minStoreCount < maxMinStoreCount)
             {
                 continue;
             }
             double x = sqrt(vat[i]) - bucket[i];
-            int x1 = static_cast<int>(x);
-            int x2 = x1 + 1;
+            int x1 = static_cast<int>(floor(x));
+            int x2 = static_cast<int>(ceil(x));
             if (x1 > 0)
             {
-                int count = calcCount(vat[i], bucket[i] + x1);
-                if (count + x1 < minCount)
+                int storeCount = calcStoreCount(vat[i], bucket[i] + x1);
+                if (storeCount + x1 < minOpCount)
                 {
-                    deltaX = x1;
-                    minCount = count + x1;
+                    minOpCount = storeCount + x1;
+                    minStoreCount = storeCount;
                 }
             }
             if (x2 > 0)
             {
-                int count = calcCount(vat[i], bucket[i] + x2);
-                if (count + x2 < minCount)
+                int storeCount = calcStoreCount(vat[i], bucket[i] + x2);
+                if (storeCount + x2 < minOpCount)
                 {
-                    deltaX = x2;
-                    minCount = count + x2;
+                    minStoreCount = std::min(minStoreCount, storeCount);
                 }
             }
-            bucket[i] += deltaX;
-            ans += deltaX;
-            maxCount = std::max(maxCount, minCount - deltaX);
+            if (minStoreCount > maxMinStoreCount)
+            {
+                maxMinStoreCount = minStoreCount;
+            }
         }
 
-        ans += maxCount;
-        return ans;
+        for (int i = 0; i < n; ++i)
+        {
+            if (vat[i] == 0) continue;
+            int size = (vat[i] / maxMinStoreCount) + (vat[i] % maxMinStoreCount == 0 ? 0 : 1);
+            if (size > bucket[i])
+            {
+                ans += size - bucket[i];
+            }
+        }
+
+        return ans + maxMinStoreCount;
     }
 
 private:
-    inline int calcCount(double v, double b)
+    /** 对于最低蓄水量为v水缸，容量为b的水桶，最少要倒多少次水 */
+    inline int calcStoreCount(int v, int b)
     {
-        return static_cast<int>(ceil(v / b));
+        return (v / b) + (v % b == 0 ? 0 : 1);
+    }
+};
+
+class Solution2
+{
+public:
+    int storeWater(std::vector<int> &bucket, std::vector<int> &vat)
+    {
+        int maxK = *std::max_element(vat.begin(), vat.end());
+        if (maxK == 0) return 0;
+        int ans = std::numeric_limits<int>::max();
+        int n = bucket.size();
+        for (int k = 1; k <= maxK && k < ans; ++k)
+        {
+            int temp = 0;
+            for (int i = 0; i < n; ++i)
+            {
+                temp += std::max(0, (vat[i] + k - 1) / k - bucket[i]);
+            }
+            ans = std::min(ans, temp + k);
+        }
+        return ans;
+    }
+};
+
+class Solution3
+{
+public:
+    int storeWater(std::vector<int> &bucket, std::vector<int> &vat)
+    {
+        int ans = 0;
+        int n = bucket.size();
+        int maxMinStoreCount = 0;
+        for (int i = 0; i < n; ++i)
+        {
+            if (vat[i] == 0) continue;
+            if (bucket[i] == 0)
+            {
+                ++bucket[i];
+                ++ans;
+            }
+
+            // int x = static_cast<int>((vat[i] - bucket[i] * bucket[i]) / static_cast<double>(bucket[i]));
+            int x = (vat[i] - bucket[i] * bucket[i]) / bucket[i];
+            if (x > 0)
+            {
+                maxMinStoreCount = std::max(maxMinStoreCount, calcStoreCount(vat[i], bucket[i] + x));
+            }
+            else
+            {
+                maxMinStoreCount = std::max(maxMinStoreCount, calcStoreCount(vat[i], bucket[i]));
+            }
+        }
+
+        for (int i = 0; i < n; ++i)
+        {
+            if (vat[i] == 0) continue;
+            int size = (vat[i] / maxMinStoreCount) + (vat[i] % maxMinStoreCount == 0 ? 0 : 1);
+            if (size > bucket[i])
+            {
+                ans += size - bucket[i];
+            }
+        }
+
+        return ans + maxMinStoreCount;
+    }
+
+private:
+    /** 对于最低蓄水量为v水缸，容量为b的水桶，最少要倒多少次水 */
+    inline int calcStoreCount(int v, int b)
+    {
+        return (v / b) + (v % b == 0 ? 0 : 1);
     }
 };
 
 int main()
 {
-    std::cout << "For Kirie" << std::endl;
+    Solution solution;
+    std::vector<int> bucket1 = {9, 0, 1};
+    std::vector<int> vat1 = {0, 2, 2};
+    int ans1 = solution.storeWater(bucket1, vat1);
+    std::cout << ans1 << std::endl;
     return 0;
 }
