@@ -74,3 +74,4 @@ add_executable(1079_letter-tile-possibilities 1079_letter-tile-possibilities.cpp
 add_executable(97_interleaving-string 97_interleaving-string.cpp)
 add_executable(2454_next-greater-element-iv 2454_next-greater-element-iv.cpp)
 add_executable(LCP33_storeWater LCP33_storeWater.cpp)
+add_executable(6441_find-the-punishment-number-of-an-integer 6441_find-the-punishment-number-of-an-integer.cpp)
