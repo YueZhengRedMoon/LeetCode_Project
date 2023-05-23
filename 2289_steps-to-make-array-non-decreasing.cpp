@@ -7,33 +7,22 @@ class Solution
 public:
     int totalSteps(std::vector<int> &nums)
     {
-        int n = nums.size();
         int ans = 0;
-        int max = 0;
-        std::stack<int> stack;
-        for (int i = 0; i < n; ++i)
+        // first:左边最近的更大的数，second:它被删除的时刻
+        std::stack<std::pair<int, int>> stack;  // 递减栈
+        for (int num : nums)
         {
-            if (nums[i] > max)
+            int maxT = 0;
+            while (!stack.empty() && stack.top().first <= num)
             {
-                int numLessThanMax = stack.size();
-                max = nums[i];
-                ans = std::max(ans, numLessThanMax);
-                std::stack<int> empty;
-                stack.swap(empty);
+                maxT = std::max(maxT, stack.top().second);  // 统计最大的被删除时刻
+                stack.pop();
             }
-            else
-            {
-                while (!stack.empty() && nums[stack.top()] > nums[i])
-                {
-                    ans = std::max(ans, i - stack.top());
-                    stack.pop();
-                }
-                stack.push(i);
-            }
+            // 如果栈为空，则表示num左边没有比它更大的数，它不会被删除，因此删除时刻为0
+            maxT = stack.empty() ? 0 : maxT + 1;
+            ans = std::max(ans, maxT);
+            stack.emplace(num, maxT);
         }
-        int numLessThanMax = stack.size();
-        ans = std::max(ans, numLessThanMax);
-
         return ans;
     }
 };
