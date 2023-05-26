@@ -82,3 +82,4 @@ add_executable(1377_frog-position-after-t-seconds 1377_frog-position-after-t-sec
 add_executable(2451_odd-string-difference 2451_odd-string-difference.cpp)
 add_executable(92_reverse-linked-list-ii 92_reverse-linked-list-ii.cpp)
 add_executable(413_arithmetic-slices 413_arithmetic-slices.cpp)
+add_executable(61_rotate-list 61_rotate-list.cpp)
