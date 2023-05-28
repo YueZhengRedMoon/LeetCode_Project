@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <algorithm>
 #include "debug.h"
 
 /** 错误，需要去重 */
@@ -40,6 +41,34 @@ public:
             }
         }
         return minHeap.top().first;
+    }
+};
+
+class Solution2
+{
+public:
+    int kthSmallest(std::vector<std::vector<int>> &mat, int k)
+    {
+        std::vector<int> a = {0};
+        for (auto &row : mat)
+        {
+            std::vector<int> b;
+            b.reserve(a.size() * row.size());
+            for (int x : a)
+            {
+                for (int y : row)
+                {
+                    b.push_back(x + y);
+                }
+            }
+            std::sort(b.begin(), b.end());
+            if (b.size() > k)
+            {
+                b.resize(k);
+            }
+            a = std::move(b);
+        }
+        return a.back();
     }
 };
 
