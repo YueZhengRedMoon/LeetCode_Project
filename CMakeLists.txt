@@ -88,3 +88,4 @@ add_executable(1039_statistics-from-a-large-sample 1039_statistics-from-a-large-
 add_executable(1439_find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows 1439_find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows.cpp)
 add_executable(2711_difference-of-number-of-distinct-values-on-diagonals 2711_difference-of-number-of-distinct-values-on-diagonals.cpp)
 add_executable(460_lfu-cache 460_lfu-cache.cpp)
+add_executable(1130_minimum-cost-tree-from-leaf-values 1130_minimum-cost-tree-from-leaf-values.cpp)
