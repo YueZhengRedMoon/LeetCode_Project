@@ -18,10 +18,12 @@ public:
         while (!queue.empty())
         {
             int cur = queue.front();
+            std::cout << cur << std::endl;
             if (cur == n * n)
             {
                 return minStep[cur];
             }
+            queue.pop();
             int step = minStep[cur] + 1;
             for (int i = 1; i <= 6; ++i)
             {
@@ -62,6 +64,14 @@ private:
 
 int main()
 {
-    std::cout << "For Kirie" << std::endl;
+    Solution solution;
+    std::vector<std::vector<int>> board = {{-1,-1,-1,-1,-1,-1},
+                                           {-1,-1,-1,-1,-1,-1},
+                                           {-1,-1,-1,-1,-1,-1},
+                                           {-1,35,-1,-1,13,-1},
+                                           {-1,-1,-1,-1,-1,-1},
+                                           {-1,15,-1,-1,-1,-1}};
+    int ans = solution.snakesAndLadders(board);
+    std::cout << ans << std::endl;
     return 0;
 }
