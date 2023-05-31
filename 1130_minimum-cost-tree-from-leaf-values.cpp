@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <stack>
 #include "debug.h"
 
 /** 错误 */
@@ -56,6 +57,49 @@ public:
         }
 
         return dp[0][n - 1];
+    }
+};
+
+/** 单调栈做法，时间复杂度O(n) */
+class Solution3
+{
+public:
+    int mctFromLeafValues(std::vector<int> &arr)
+    {
+        /** 对arr[i-1], arr[i], arr[i + 1]来说：
+         *  如果arr[i-1] > arr[i] && arr[i] < arr[i+1]
+         *  如果arr[i-1] < arr[i+1]，则应该优先合并arr[i-1]与arr[i]
+         *  如果arr[i-1] > arr[i+1]，则应该优先合并arr[i]与arr[i+1]
+         *  */
+        int ans = 0;
+        std::stack<int> stack;
+        for (int x : arr)
+        {
+            // arr[i] <= arr[i+1]
+            while (!stack.empty() && stack.top() <= x)
+            {
+                int y = stack.top();    // arr[i]
+                stack.pop();
+                if (stack.empty() || stack.top() > x)   // arr[i-1] > arr[i+1]
+                {
+                    ans += y * x;   // 合并arr[i]与arr[i+1]
+                }
+                else    // arr[i-1] < arr[i + 1]
+                {
+                    ans += stack.top() * y; // 合并arr[i-1]与arr[i]
+                }
+                // 合并后arr[i-1]变为新的arr[i]
+            }
+            stack.push(x);
+        }
+        // 当剩下的节点都是递减的时候，从右往左依次合并，每次新生成的节点是最小的
+        while (stack.size() >= 2)
+        {
+            int x = stack.top();
+            stack.pop();
+            ans += stack.top() * x;
+        }
+        return ans;
     }
 };
 
