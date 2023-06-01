@@ -90,3 +90,4 @@ add_executable(2711_difference-of-number-of-distinct-values-on-diagonals 2711_di
 add_executable(460_lfu-cache 460_lfu-cache.cpp)
 add_executable(1130_minimum-cost-tree-from-leaf-values 1130_minimum-cost-tree-from-leaf-values.cpp)
 add_executable(909_snakes-and-ladders 909_snakes-and-ladders.cpp)
+add_executable(399_evaluate-division 399_evaluate-division.cpp)
