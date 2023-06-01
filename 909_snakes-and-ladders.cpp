@@ -18,7 +18,6 @@ public:
         while (!queue.empty())
         {
             int cur = queue.front();
-            std::cout << cur << std::endl;
             if (cur == n * n)
             {
                 return minStep[cur];
@@ -50,13 +49,13 @@ private:
     {
         int x = n - ((i - 1) / n) - 1;
         int y;
-        if ((i / n) % 2 == 1)
+        if (((i - 1) / n) % 2 == 1)
         {
-            y = (i - 1) % n;
+            y = (n - 1) - (i - 1) % n;
         }
         else
         {
-            y = (n - 1) - (i - 1) % n;
+            y = (i - 1) % n;
         }
         return board[x][y];
     }
@@ -65,6 +64,13 @@ private:
 int main()
 {
     Solution solution;
+    std::vector<std::vector<int>> board2 = {{-1,-1,2,-1},
+                                            {14,2,12,3},
+                                            {4,9,1,11},
+                                            {-1,2,1,16}};
+    int ans2 = solution.snakesAndLadders(board2);
+    std::cout << ans2 << std::endl;
+
     std::vector<std::vector<int>> board = {{-1,-1,-1,-1,-1,-1},
                                            {-1,-1,-1,-1,-1,-1},
                                            {-1,-1,-1,-1,-1,-1},
