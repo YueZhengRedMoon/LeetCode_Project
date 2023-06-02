@@ -49,12 +49,16 @@ namespace debug
         }
     }
 
-    void printLinkedList(ListNode *head)
+    void printLinkedList(ListNode *head, const char *split = "->")
     {
         ListNode *p = head;
         while (p)
         {
-            std::cout << p->val << ' ';
+            std::cout << p->val;
+            if (p->next)
+            {
+                std::cout << split;
+            }
             p = p->next;
         }
         std::cout << std::endl;
