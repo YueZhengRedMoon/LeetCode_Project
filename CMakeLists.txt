@@ -92,3 +92,4 @@ add_executable(1130_minimum-cost-tree-from-leaf-values 1130_minimum-cost-tree-fr
 add_executable(909_snakes-and-ladders 909_snakes-and-ladders.cpp)
 add_executable(399_evaluate-division 399_evaluate-division.cpp)
 add_executable(148_sort-list 148_sort-list.cpp)
+add_executable(1156_swap-for-longest-repeated-character-substring 1156_swap-for-longest-repeated-character-substring.cpp)
