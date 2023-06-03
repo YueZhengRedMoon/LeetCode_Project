@@ -1,6 +1,8 @@
 #include <iostream>
+#include <unordered_map>
 #include <vector>
 
+/** 错误 */
 class Solution
 {
 public:
@@ -53,21 +55,23 @@ public:
 
             if (text[i] != text[i - 1])
             {
-                if (i + 1 < textLen && (text[i + 1] - 'a') == charIndex)
+                // text[i]可以作为间隔
+                if (i + 1 < textLen && text[i - 1] == text[i + 1])
                 {
-                    if (cutIndex == -1)
-                    {
-                        cutIndex = i;
-                    }
-                    else
+                    // 从start到i-1已经有不同的字符
+                    if (cutIndex != -1)
                     {
                         update(charIndex, start, i - 1, cutIndex);
                         start = cutIndex + 1;
                         cutIndex = i;
                     }
+                    else
+                    {
+                        cutIndex = i;
+                    }
                     ++i;
-                    character[text[i] - 'a'].last = i;
                 }
+                // text[i]不可以作为间隔
                 else
                 {
                     update(charIndex, start, i - 1, cutIndex);
@@ -82,7 +86,7 @@ public:
         int ans = 0;
         for (int i = 0; i < 26; ++i)
         {
-            int len = character[i].end - character[i].first + 1;
+            int len = character[i].end - character[i].begin + 1;
             // 有多余字母可以交换
             if (character[i].first < character[i].begin || character[i].last > character[i].end)
             {
@@ -107,9 +111,47 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    int maxRepOpt1(std::string text)
+    {
+        std::unordered_map<char, int> count;    // 每种字符出现的次数
+        for (char c : text)
+        {
+            ++count[c];
+        }
+
+        int ans = 0, textLen = text.size();
+        for (int i = 0; i < textLen; )
+        {
+            // 找出当前连续的一段[i, j)
+            int j = i;
+            while (j < textLen && text[j] == text[i]) ++j;
+            int curCnt = j - i; // 当前连续单字符重复子串的长度
+
+            // 如果这一段长度小于该字符出现的总数，并且前面或后面有空位，则表明可以交换，用curCnt+1更新答案
+            if (curCnt < count[text[i]] && (j < textLen || i > 0))
+            {
+                ans = std::max(ans, curCnt + 1);
+            }
+
+            // 找到这一段后面与之相隔一个不同字符的另一段[j + 1, k)，如果不存在则k = j + 1
+            int k = j + 1;
+            while (k < textLen && text[k] == text[i]) ++k;
+            // 交换一个字符到j，以连接[i, j)和[j + 1, k)，
+            // 如果没有这两个区间以外的字符可以交换，则需要将区间最边上的一个字符换中间来填补
+            ans = std::max(ans, std::min(k - i, count[text[i]]));
+            i = j;
+        }
+
+        return ans;
+    }
+};
+
 int main()
 {
-    Solution solution;
+    Solution2 solution;
     std::string text("bbababaaaa");
     int ans = solution.maxRepOpt1(text);
     std::cout << ans << std::endl;
