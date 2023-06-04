@@ -34,17 +34,46 @@ public:
                         x = i;
                     }
                 }
-                if (x == destination)
+                if (x == destination)   // 起点source到终点destination的最短路已经确定
                 {
                     return;
                 }
                 visited[x] = true;
+                // 遍历x的所有出边，更新最短路
                 for (auto [y, eid] : g[x])
                 {
-
+                    int wt = edges[eid][2];
+                    if (wt == -1)
+                    {
+                        wt = 1;
+                    }
+                    if (k == 1 && edges[eid][2] == -1)
+                    {
+                        int w = delta + dis[y][0] - dis[x][1];
+                        if (w > wt)
+                        {
+                            edges[eid][2] = wt = w;
+                        }
+                    }
+                    dis[y][k] = std::min(dis[y][k], dis[x][k] + wt);
                 }
             }
         };
+
+        dijkstra(0);
+        delta = target - dis[destination][0];
+        if (delta < 0)
+            return {};
+
+        dijkstra(1);
+        if (dis[destination][1] < target)
+            return {};
+
+        for (auto &e : edges)
+            if (e[2] == -1)
+                e[2] = 1;
+
+        return edges;
     }
 };
 
