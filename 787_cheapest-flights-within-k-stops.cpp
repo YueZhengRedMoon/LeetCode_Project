@@ -83,6 +83,40 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    int findCheapestPrice(int n, std::vector<std::vector<int>> &flights, int src, int dst, int k)
+    {
+        const int inf = 0x3f3f3f3f;
+        // dp[i][j]:经过i次中转从src到达dst的最小成本
+        std::vector<std::vector<int>> dp(2, std::vector<int>(n, inf));
+        dp[0][src] = 0;
+
+        int ans = inf, flightsNum = flights.size();
+        for (int i = 1; i <= k + 1; ++i)
+        {
+            int cur = i % 2, last = (i - 1) % 2;
+            std::fill(dp[cur].begin(), dp[cur].end(), inf);
+            for (int j = 0; j < flightsNum; ++j)
+            {
+                int from = flights[j][0];
+                if (dp[last][from] != inf)
+                {
+                    int to = flights[j][1], cost = flights[j][2];
+                    dp[cur][to] = std::min(dp[cur][to], dp[last][from] + cost);
+                    if (to == dst && dp[cur][to] < ans)
+                    {
+                        ans = dp[cur][to];
+                    }
+                }
+            }
+        }
+
+        return ans == inf ? -1 : ans;
+    }
+};
+
 int main()
 {
     std::cout << "For Kirie" << std::endl;
