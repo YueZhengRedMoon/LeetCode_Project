@@ -33,7 +33,7 @@ public:
         std::vector<std::vector<std::string>> path(m, std::vector<std::string>(n, "impossible"));
         dis[bx][by] = 0;
         path[bx][by] = "";
-        std::priority_queue<Status, std::vector<Status>, std::greater<Status>> queue;
+        std::priority_queue<Status, std::vector<Status>, std::greater<>> queue;
         queue.emplace(bx, by, 0, "");
         auto isValid = [&](int x, int y) -> bool {
             return x >= 0 && x < m && y >= 0 && y < n && maze[x][y] == 0;
