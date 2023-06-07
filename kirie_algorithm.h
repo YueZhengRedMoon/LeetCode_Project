@@ -273,6 +273,46 @@ namespace kirie
             }
         }
     };
-}
+
+    /** 快速选择算法，将第n小的元素放在第n个位置，
+     *  所有比它小的元素都在它的左边，所有比它大的元素都在它的右面 */
+    template<typename RandomIt>
+    void nth_element(RandomIt first, RandomIt nth, RandomIt last)
+    {
+        if (first >= last || nth >= last)
+            return;
+
+        // 选择一个枢轴，使得所有比他小的元素都在它的左边，所有比它大的元素都在它的右边
+        RandomIt pivot = std::prev(last);
+        RandomIt left = first;
+        RandomIt right =std::prev(last);
+
+        while (left < right)
+        {
+            // 找到第一个大于等于枢轴的元素，准备将它交换到枢轴的右边
+            while (left < right && *left < *pivot)
+                ++left;
+            // 找到第一个小于枢轴的元素，准备将它交换到枢轴的左边
+            while (left < right && *right >= *pivot)
+                --right;
+            // 交换两个元素到正确的位置
+            if (left < right)
+                std::iter_swap(left, right);
+        }
+
+        // 循环结束时left指向的是最小的 >= pivot的元素，将其与枢轴交换
+        std::iter_swap(left, pivot);
+
+        // 枢轴元素正好是第n个元素，找到了第n小的元素
+        if (left == nth)
+            return;
+        // 枢轴元素在第n个元素左边，在枢轴元素的右边继续寻找
+        else if (left < nth)
+            kirie::nth_element(left + 1, nth, last);
+        // 枢轴元素在第n个元素的右边，在枢轴元素的左边继续寻找
+        else
+            kirie::nth_element(first, nth, left);
+    }
+}   // namespace kirie
 
 #endif //__LEET_CODE_PROJECT_ALGORITHM_H
