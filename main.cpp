@@ -7,9 +7,12 @@
 
 int main()
 {
-    std::vector<int> nums = {18, 20, 2, 5, 8, 0, 21, 19, 7, 4, 13};
-    kirie::nth_element(nums.begin(), nums.begin() + 5, nums.end());
-    debug::printVector(nums);
-    std::cout << kirie::max(39, 404) << std::endl;
+    std::vector<std::vector<int>> edges{{0, 2, 1}, {1, 2, 2}, {2, 3, 3}, {1, 4, 10}, {2, 5, 7}, {3, 5, 1},
+                                        {3, 6, 5}, {4, 5, 5}, {5, 6, 8}};
+    int edgeNum = 9;
+    int vertexNum = 7;
+    kirie::MinimumSpanningTree mst(edgeNum, vertexNum, edges);
+    int res = mst.prim(kirie::GraphMode::ADJ_LIST);
+    std::cout << res << std::endl;
     return 0;
 }
