@@ -8,6 +8,7 @@
 #include <iostream>
 #include <forward_list>
 #include <queue>
+#include <limits>
 
 namespace kirie
 {
@@ -91,26 +92,26 @@ namespace kirie
         return std::min(t, min(args...));
     }
 
+    enum class GraphMode
+    {
+        DEFAULT,
+        ADJ_MATRIX,
+        ADJ_LIST
+    };
+
+    struct OutEdge
+    {
+        int to;
+        int cost;
+    };
+
     /** 求解有向图最短路的算法 */
     class ShortestPath
     {
     public:
-        enum class GraphMode
-        {
-            DEFAULT,
-            ADJ_MATRIX,
-            ADJ_LIST
-        };
-
         struct Edge
         {
             int from;
-            int to;
-            int cost;
-        };
-
-        struct OutEdge
-        {
             int to;
             int cost;
         };
@@ -215,7 +216,7 @@ namespace kirie
         std::vector<bool> visited;  // visited[i]:源点到顶点i的最短路是否已经求出
         std::vector<std::vector<int>> adjMatrix;
         std::vector<std::forward_list<OutEdge>> adjList;
-        const int inf{0x3f3f3f3f};
+        const int inf{std::numeric_limits<int>::max()};
 
         /** 使用邻接矩阵版本的Dijkstra算法求解最短路 */
         void adjMatrixDijkstra(int source)
@@ -271,6 +272,114 @@ namespace kirie
                     }
                 }
             }
+        }
+    };
+
+    class MinimumSpanningTree
+    {
+    public:
+        MinimumSpanningTree(int edgeNum_, int vertexNum_, std::vector<std::vector<int>> &edges_):
+        edgeNum(edgeNum_),
+        vertexNum(vertexNum_),
+        adjMatrix(vertexNum_, std::vector<int>(vertexNum_, inf)),
+        adjList(vertexNum_),
+        visited(vertexNum_),
+        minCost(vertexNum_)
+        {
+            for (const auto &e : edges_)
+            {
+                adjMatrix[e[0]][e[1]] = e[2];
+                adjMatrix[e[1]][e[0]] = e[2];
+
+                adjList[e[0]].push_front({e[1], e[2]});
+                adjList[e[1]].push_front({e[0], e[2]});
+            }
+        }
+
+        int prim(GraphMode mode)
+        {
+            if (mode == GraphMode::ADJ_MATRIX)
+                return adjMatrixPrim();
+            else
+                return adjListPrim();
+        }
+
+    private:
+        int edgeNum;
+        int vertexNum;
+        std::vector<std::vector<int>> adjMatrix;
+        std::vector<std::forward_list<OutEdge>> adjList;
+        std::vector<bool> visited;  // visited[i]:顶点i是否已经加入生成树
+        std::vector<int> minCost;   // 从生成树集合X出发，到每个顶点的最小权值
+        const int inf{std::numeric_limits<int>::max()};
+
+        int adjMatrixPrim()
+        {
+            for (int i = 0; i < vertexNum; ++i)
+            {
+                minCost[i] = inf;
+                visited[i] = false;
+            }
+            minCost[0] = 0;
+            int res = 0;
+            while (true)
+            {
+                int v = -1;
+                // 从不属于X的顶点中选取出X到其权值最小的顶点
+                for (int u = 0; u < vertexNum; ++u)
+                {
+                    if (!visited[u] && (v == -1 || minCost[u] < minCost[v]))
+                    {
+                        v = u;
+                    }
+                }
+                // 所有顶点都已经加入生成树
+                if (v == -1)
+                    break;
+                // 将顶点v加入X
+                visited[v] = true;
+                // 把边的长度加入到结果里
+                res += minCost[v];
+                // 新的顶点加入到了生成树中，更新剩余顶点到生成树的最小权值
+                for (int u = 0; u < vertexNum; ++u)
+                {
+                    minCost[u] = std::min(minCost[u], adjMatrix[v][u]);
+                }
+            }
+            return res;
+        }
+
+        int adjListPrim()
+        {
+            for (int i = 0; i < vertexNum; ++i)
+            {
+                minCost[i] = inf;
+                visited[i] = false;
+            }
+            minCost[0] = 0;
+            // first是顶点到生成树的成本，second是顶点的编号
+            std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<>> queue;
+            queue.emplace(0, 0);
+            int res = 0, vertexInTree = 0;
+            while (vertexInTree < vertexNum && !queue.empty())
+            {
+                auto [cost, v] = queue.top();
+                queue.pop();
+                if (visited[v] || cost > minCost[v])
+                    continue;
+                visited[v] = true;
+                res += minCost[v];
+                ++vertexInTree;
+                for (const auto &e : adjList[v])
+                {
+                    if (!visited[e.to] && e.cost < minCost[e.to])
+                    {
+                        minCost[e.to] = e.cost;
+                        queue.emplace(minCost[e.to], e.to);
+                    }
+                }
+            }
+            return res;
         }
     };
 
