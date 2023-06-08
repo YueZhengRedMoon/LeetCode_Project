@@ -79,6 +79,7 @@ private:
         // 1 1 1 1
         // 0 0 1 1
         // 0 0 1 1
+        // 0 0 1 1
         for (int i = 0; i < maxLen; ++i)
         {
             for (int j = 0; j < maxLen; ++j)
