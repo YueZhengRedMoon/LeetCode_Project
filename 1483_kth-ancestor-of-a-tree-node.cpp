@@ -41,7 +41,8 @@ private:
 class TreeAncestor
 {
 public:
-    TreeAncestor(int n, std::vector<int> &parent) : ancestors(n, std::vector<int>(LOG, -1))
+    TreeAncestor(int n, std::vector<int> &parent)
+    : ancestors(n, std::vector<int>(LOG, -1))
     {
         for (int i = 0; i < n; ++i)
         {
