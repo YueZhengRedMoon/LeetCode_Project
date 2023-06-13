@@ -4,6 +4,8 @@
 
 #ifndef __LEET_CODE_PROJECT_ALGORITHM_H
 #define __LEET_CODE_PROJECT_ALGORITHM_H
+#define likely(x) __builtin_expect(!!(x), 1)    // 表达式x很可能为真
+#define unlikely(x) __builtin_expect(!!(x), 0)  // 表达式x很可能为假
 #include <functional>
 #include <iostream>
 #include <forward_list>
