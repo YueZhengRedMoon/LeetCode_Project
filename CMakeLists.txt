@@ -101,3 +101,4 @@ add_executable(1240_tiling-a-rectangle-with-the-fewest-squares 1240_tiling-a-rec
 add_executable(2699_modify-graph-edge-weights 2699_modify-graph-edge-weights.cpp)
 add_executable(1135_connecting-cities-with-minimum-cost 1135_connecting-cities-with-minimum-cost.cpp)
 add_executable(294_flip-game-ii 294_flip-game-ii.cpp)
+add_executable(351_android-unlock-patterns 351_android-unlock-patterns.cpp)
