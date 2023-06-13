@@ -2,6 +2,7 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
+#include <numeric>
 
 /** 错误 */
 class Solution
@@ -88,6 +89,8 @@ public:
         std::vector<int> subStates;
         int len = state.size(), i = 0, j = 0;
         int max = -1;   // 最长的子状态
+        // 统计给定字符串所有的子状态
+        // 例如 ++--+++-+ 将得到 (2, 3, 1)
         while (i < len)
         {
             if (state[i] == '-')
@@ -111,14 +114,17 @@ public:
         // 通过动态规划计算SG函数的g值
         // Sprague-Grundy定理：
         // 如果一个节点x的g(x)=0，那么x状态一定是“先手必输”的状态，否则一定是“先手必赢”
-        // 如果x的子状态是{x1, x2, ……, xn}SG函数g(x)=g(x1)^(x2)^……^g(xn)
+        // 如果“游戏图”中的单个状态x可以推导出子状态{y1, y2, ……, yn}，则g(x)=mex(g(y1), g(y2),……,g(yn))
+        // mex(X):集合X中第一个缺失的非负整数
+        // 对于游戏的一个状态X = {x1, x2, ……, xn}，SG函数g(X)=g(x1)^(x2)^……^g(xn)
         std::vector<int> dp(max + 1, 0);
-        std::vector<int> temp;
         dp[2] = 1;
 
         // 计算g[i]的值，获取下一步的所有状态的g值
         for (i = 3; i <= max; ++i)
         {
+            // 从['+'] * i可以推出的所有状态
+            std::vector<int> temp;
             // 把s[j]和s[j+1]从++变成--，连续的+变成两段，长度分别为j和i-j-2
             for (j = 0; j < i / 2; ++j)
             {
@@ -138,7 +144,6 @@ public:
                     ++mis;
             }
             dp[i] = mis;
-            temp.clear();
         }
 
         int ans = 0;
