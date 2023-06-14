@@ -102,3 +102,4 @@ add_executable(2699_modify-graph-edge-weights 2699_modify-graph-edge-weights.cpp
 add_executable(1135_connecting-cities-with-minimum-cost 1135_connecting-cities-with-minimum-cost.cpp)
 add_executable(294_flip-game-ii 294_flip-game-ii.cpp)
 add_executable(351_android-unlock-patterns 351_android-unlock-patterns.cpp)
+add_executable(1177_can-make-palindrome-from-substring 1177_can-make-palindrome-from-substring.cpp)
