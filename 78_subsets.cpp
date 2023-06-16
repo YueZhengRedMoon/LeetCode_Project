@@ -64,6 +64,40 @@ private:
     }
 };
 
+class Solution3
+{
+public:
+    std::vector<std::vector<int>> subsets(std::vector<int> &nums)
+    {
+        int set = 0;
+        for (int num : nums)
+        {
+            set |= 1 << (num + 10);
+        }
+
+        std::vector<std::vector<int>> ans;
+        ans.emplace_back();
+        for (int sub = set; sub; sub = (sub - 1) & (set))
+        {
+            std::vector<int> subset;
+            int bit = sub;
+            int j = 0;
+            while (bit)
+            {
+                if (bit & 1)
+                {
+                    subset.push_back(j - 10);
+                }
+                ++j;
+                bit >>= 1;
+            }
+            ans.push_back(std::move(subset));
+        }
+
+        return ans;
+    }
+};
+
 void printVector(const std::vector<int>& nums)
 {
     for (int i = 0; i < nums.size(); ++i)
