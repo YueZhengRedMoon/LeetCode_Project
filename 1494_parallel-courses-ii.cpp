@@ -93,7 +93,7 @@ public:
     int minNumberOfSemesters(int n, std::vector<std::vector<int>> &relations, int k)
     {
         const int inf = std::numeric_limits<int>::max();
-        // dp[i]:完成课程集合i所需要的最少学期数
+        // dp[i]:完成课程集合i所需要的最少学期数，dp[i]=inf表示课程集合无法完成
         std::vector<int> dp(1 << n, inf);
         // need[i]:完成课程集合i的先修课程集合
         std::vector<int> need(1 << n, 0);
@@ -108,26 +108,40 @@ public:
         {
             // i & (i - 1)将i最右边的1置0
             // i & (-i)获取i最右边的1所对应的值
+
+            // 对于need[i]，找到状态i的「任意」一个子集sub，
+            // 课程集合i的先修课程为集合sub和集合i中去掉sub后所需的先修课程集合的并集。
+            // 为了方便计算，令sub为i的二进制的最低位，可以用i & (-i)表示，
+            // 集合i中去掉sub后所需的先修课程表示为i & (i - 1)。
+            // i & (-i) 和 i & (i - 1)的值都比i小，因此计算need[i]时，
+            // need[i & (-i)]和need[i & (i - 1)]的值一定已经计算出来了。
+
+            // 计算学习课程集合i所需要的先修课程的集合
             need[i] = need[i & (i - 1)] | need[i & (-i)];
+
+            // i表示要学习课程的集合，need[i]:表示学习课程集合i所需的先修课程的集合
+            // need[i]必须是i的子集，这样才能学习课程集合i
             if ((need[i] | i) != i)
             {
                 // i 中有任意一门课程的前置课程没有完成学习
                 continue;
             }
-            // 当前学期可以进行学习的课程集合
+            // 要学习的课程集合减去先修课程的集合，即为本学期可以学习的课程，先修课程已经学习过了，所以不需要再学习一遍
             int valid = i ^ need[i];
             // 本学期可以学习的课程数不超过k，则可以全部学习，不需要枚举
             if (__builtin_popcount(valid) <= k)
             {
                 dp[i] = std::min(dp[i], dp[i ^ valid] + 1);
             }
-            // 本学期可以学习的课程数超过k，需要枚举
+            // 本学期可以学习的课程数超过k，需要枚举本学期学习的课程集合sub
             else
             {
+                // 降序遍历valid的非空子集,valid是i的非空子集，所以i ^ sub等于集合i中减去集合sub的部分
                 for (int sub = valid; sub; sub = (sub - 1) & valid)
                 {
                     if (__builtin_popcount(sub) <= k)
                     {
+                        // 因为sub是valid的非空子集，所以
                         dp[i] = std::min(dp[i], dp[i ^ sub] + 1);
                     }
                 }
