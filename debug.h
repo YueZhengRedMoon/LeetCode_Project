@@ -53,5 +53,15 @@ namespace debug
             std::cout << std::endl;
         }
     }
+
+    template<typename Iter>
+    void printIterRange(Iter begin, Iter end, char split = ' ')
+    {
+        for (Iter it = begin; it != end; ++it)
+        {
+            std::cout << *it << split;
+        }
+        std::cout << std::endl;
+    }
 }
 #endif //__LEET_CODE_PROJECT_DEBUG_H
