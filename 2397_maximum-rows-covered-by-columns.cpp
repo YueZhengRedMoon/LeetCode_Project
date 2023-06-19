@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <functional>
+#include "debug.h"
 
 class Solution
 {
@@ -50,8 +51,62 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    int maximumRows(std::vector<std::vector<int>> &matrix, int numSelect)
+    {
+        int m = matrix.size(), n = matrix[0].size();
+        std::vector<int> rows(m, 0);
+        for (int i = 0; i < m; ++i)
+        {
+            for (int j = 1; j <= n; ++j)
+            {
+                if (matrix[i][n - j])
+                {
+                    rows[i] |= 1 << (j - 1);
+                }
+            }
+        }
+
+        int begin = (1 << numSelect) - 1;
+        int end = begin << (n - numSelect);
+        int cols = begin;
+        int ans = 0;
+        while (cols <= end)
+        {
+            std::cout << "cols = ";
+            debug::printBinaryValue<3>(cols);
+
+            int cnt = 0;
+            // 遍历每一行
+            for (int row : rows)
+            {
+                if ((row | cols) == cols)
+                {
+                    ++cnt;
+                }
+            }
+
+            if (cnt > ans)
+                ans = cnt;
+
+            int lowBit = cols & -cols;
+            int left = cols + lowBit;
+            int right = (cols ^ (cols + lowBit)) / lowBit >> 2;
+            cols = left | right;
+        }
+
+        return ans;
+    }
+};
+
 int main()
 {
-    std::cout << "For Kirie" << std::endl;
+    Solution2 solution;
+    std::vector<std::vector<int>> matrix = {{0,0,0},{1,0,1},{0,1,1},{0,0,1}};
+    int numSelect = 2;
+    int ans = solution.maximumRows(matrix, numSelect);
+    std::cout << ans << std::endl;
     return 0;
 }

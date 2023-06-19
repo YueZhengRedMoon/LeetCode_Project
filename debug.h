@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <bitset>
 
 namespace debug
 {
@@ -62,6 +63,13 @@ namespace debug
             std::cout << *it << split;
         }
         std::cout << std::endl;
+    }
+
+    template<int N>
+    void printBinaryValue(unsigned int value)
+    {
+        std::bitset<N> bits(value);
+        std::cout << bits.to_string() << std::endl;
     }
 }
 #endif //__LEET_CODE_PROJECT_DEBUG_H
