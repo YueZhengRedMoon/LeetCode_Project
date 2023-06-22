@@ -3,10 +3,6 @@ project(__Leet_Code_Project)
 
 set(CMAKE_CXX_STANDARD 17)
 
-include(debug.h)
-include(leetcode.h)
-include(kirie_algorithm.h)
-
 add_executable(__Leet_Code_Project main.cpp)
 add_executable(145_binary-tree-postorder-traversal 145_binary-tree-postorder-traversal.cpp)
 add_executable(94_binary-tree-inorder-traversal 94_binary-tree-inorder-traversal.cpp)
@@ -110,3 +106,4 @@ add_executable(1262_greatest-sum-divisible-by-three 1262_greatest-sum-divisible-
 add_executable(2397_maximum-rows-covered-by-columns 2397_maximum-rows-covered-by-columns.cpp)
 add_executable(LCP41_flipChess LCP41_flipChess.cpp)
 add_executable(pond-sizes-lcci Interview/pond-sizes-lcci.cpp)
+add_executable(418_sentence-screen-fitting 418_sentence-screen-fitting.cpp)
