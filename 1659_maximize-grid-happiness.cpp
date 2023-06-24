@@ -149,7 +149,7 @@ private:
                     ++ivCount[mask];
                     innerScore[mask] += 120;
                 }
-                // 外向的人
+                    // 外向的人
                 else if (x == 2)
                 {
                     ++evCount[mask];
