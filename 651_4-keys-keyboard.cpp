@@ -11,7 +11,6 @@ public:
         if (n <= 3) return n;
         // dp[i][j].first：第j次按键通过第i种操作最多能输出几个A，以及此时剪贴板中A的数量
         // i = 0:直接输入A i = 1:粘贴剪贴板中的内容 i = 2:全选、复制、粘贴
-        const int ninf = std::numeric_limits<int>::min();
         std::vector<std::vector<std::pair<int, int>>> dp(3, std::vector<std::pair<int, int>>(n));
         for (int j = 0; j < 3; ++j)
         {
