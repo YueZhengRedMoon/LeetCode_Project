@@ -107,3 +107,4 @@ add_executable(2397_maximum-rows-covered-by-columns 2397_maximum-rows-covered-by
 add_executable(LCP41_flipChess LCP41_flipChess.cpp)
 add_executable(pond-sizes-lcci Interview/pond-sizes-lcci.cpp)
 add_executable(418_sentence-screen-fitting 418_sentence-screen-fitting.cpp)
+add_executable(562_longest-line-of-consecutive-one-in-matrix 562_longest-line-of-consecutive-one-in-matrix.cpp)
