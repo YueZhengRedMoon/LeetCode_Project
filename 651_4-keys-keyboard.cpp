@@ -71,8 +71,34 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    int maxA(int n)
+    {
+        // dp[i]:通过i次按键最多能输出几个'A'
+        std::vector<int> dp(n + 1, 0);
+        for (int i = 1; i <= n; ++i)
+        {
+            dp[i] = dp[i - 1] + 1;  // 直接输入'A'
+            for (int j = 0; j < i - 1; ++j)
+            {
+                // 当j == i - 2时：i-2全选，i-1复制,i粘贴
+                dp[i] = std::max(dp[i], dp[j] * (i - j - 1));
+            }
+        }
+        return dp[n];
+    }
+};
+
 int main()
 {
-
+    Solution solution1;
+    Solution2 solution2;
+    int n = 76;
+    int ans1 = solution1.maxA(n);
+    int ans2 = solution2.maxA(n);
+    std::cout << ans1 << std::endl;
+    std::cout << ans2 << std::endl;
     return 0;
 }
