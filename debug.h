@@ -9,6 +9,9 @@
 #include <algorithm>
 #include <bitset>
 
+#define print(obj) std::cout << obj
+#define println(obj) std::cout << obj << std::endl;
+
 namespace debug
 {
     template<typename T>
