@@ -41,6 +41,22 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    int maxDistance(std::vector<std::vector<int>> &arrays)
+    {
+        int ans = 0, minVal = arrays[0].front(), maxVal = arrays[0].back();
+        for (int i = 1; i < arrays.size(); ++i)
+        {
+            ans = std::max({ans, std::abs(arrays[i].back() - minVal), std::abs(maxVal - arrays[i].front())});
+            minVal = std::min(minVal, arrays[i].front());
+            maxVal = std::max(maxVal, arrays[i].back());
+        }
+        return ans;
+    }
+};
+
 int main()
 {
     Solution solution;
