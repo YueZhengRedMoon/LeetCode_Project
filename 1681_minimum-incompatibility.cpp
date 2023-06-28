@@ -19,8 +19,8 @@ public:
         if (maxCount > k)
             return -1;
 
-        int n = nums.size();
-        int m = n / k;    // 每个子集的大小
+        n = nums.size();
+        m = n / k;    // 每个子集的大小
         // 遍历所有长度为n且恰好有m个1的二进制数
         int begin = (1 << m) - 1;   // 0000111
         int end = begin << (n - m); // 1110000
@@ -39,7 +39,7 @@ public:
             x = left | right;
         }
 
-        backtracking(0, 0, 0);
+        backtracking(0, 0, 0, 0);
         return memo[(1 << n) - 1];
     }
 
@@ -47,6 +47,8 @@ private:
     std::unordered_map<int, int> memo;
     std::vector<std::pair<int, int>> subsets;
     const int inf{0x3f3f3f3f};
+    int n;
+    int m;
 
     int calcIncompatibility(int bitset, std::vector<int> &nums)
     {
@@ -77,18 +79,19 @@ private:
         return max - min;
     }
 
-    void backtracking(int s, int begin, int incomp)
+    void backtracking(int s, int begin, int incomp, int size)
     {
         auto it = memo.find(s);
         if (it != memo.end() && it->second <= incomp)
             return;
 
         memo[s] = incomp;
-        for (int i = begin; i < subsets.size(); ++i)
+        int subsetsSize = subsets.size();
+        for (int i = begin; i < subsetsSize && size + (subsetsSize - i) * m >= n; ++i)
         {
             if ((s & subsets[i].first) == 0)
             {
-                backtracking(s | subsets[i].first, i + 1, incomp + subsets[i].second);
+                backtracking(s | subsets[i].first, i + 1, incomp + subsets[i].second, size + m);
             }
         }
     }
