@@ -29,9 +29,8 @@ public:
                 auto it = std::upper_bound(index.begin(), index.end(), j);
                 if (it == index.end())
                 {
-                    j = -1;
+                    j = index[0];
                     ++ans;
-                    --i;
                 }
                 else
                 {
