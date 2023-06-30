@@ -1,39 +1,49 @@
 #include <iostream>
 #include <unordered_map>
-#include <deque>
 
 class Solution
 {
 public:
     int lengthOfLongestSubstringKDistinct(std::string s, int k)
     {
-        std::deque<std::pair<char, int>> indices;
-        std::unordered_map<char, std::deque<std::pair<char, int>>::iterator> IterMap;
+        if (k == 0)
+            return 0;
 
-        int len = s.size(), begin = 0;
+        std::unordered_map<char, int> lastIndex;
+        int ans = 0, begin = 0, len = s.size();
         for (int i = 0; i < len; ++i)
         {
-            auto mapIt = IterMap.find(s[i]);
-            if (mapIt != IterMap.end())
+            auto it = lastIndex.find(s[i]);
+            if (it != lastIndex.end())
             {
-                mapIt->second->second = i;
+                it->second = i;
             }
             else
             {
-                if (indices.size() < k)
+                if (lastIndex.size() < k)
                 {
-                    indices.emplace_back(s[i], i);
-                    auto it = indices.end() - 1;
-                    IterMap[s[i]] = it;
+                    lastIndex[s[i]] = i;
                 }
                 else
                 {
-                    std::pair<char, int> front = indices.front();
-                    begin = front.second + 1;
-                    IterMap.erase(front.first);
+                    int minIndex = len;
+                    int minChar;
+                    for (it = lastIndex.begin(); it != lastIndex.end(); ++it)
+                    {
+                        if (it->second < minIndex)
+                        {
+                            minChar = it->first;
+                            minIndex = it->second;
+                        }
+                    }
+                    begin = minIndex + 1;
+                    lastIndex.erase(minChar);
+                    lastIndex[s[i]] = i;
                 }
             }
+            ans = std::max(ans, i - begin + 1);
         }
+        return ans;
     }
 };
 
