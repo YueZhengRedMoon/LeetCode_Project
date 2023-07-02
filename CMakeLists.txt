@@ -111,3 +111,4 @@ add_executable(562_longest-line-of-consecutive-one-in-matrix 562_longest-line-of
 add_executable(651_4-keys-keyboard 651_4-keys-keyboard.cpp)
 add_executable(624_maximum-distance-in-arrays 624_maximum-distance-in-arrays.cpp)
 add_executable(1100_find-k-length-substrings-with-no-repeated-characters 1100_find-k-length-substrings-with-no-repeated-characters.cpp)
+add_executable(249_group-shifted-strings 249_group-shifted-strings.cpp)

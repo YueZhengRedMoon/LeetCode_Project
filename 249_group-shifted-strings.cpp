@@ -1,17 +1,19 @@
 #include <iostream>
 #include <vector>
-#include <map>
+#include <unordered_map>
+#include "debug.h"
 
 class Solution
 {
 public:
     std::vector<std::vector<std::string>> groupStrings(std::vector<std::string> &strings)
     {
-        std::map<std::vector<int>, std::vector<std::string>> group;
+        std::unordered_map<std::string, std::vector<std::string>> group;
         for (const std::string &s : strings)
         {
-            group[getPattern(s)].emplace_back(s);
+            group[shift(s)].emplace_back(s);
         }
+
         std::vector<std::vector<std::string>> ans;
         for (auto it = group.begin(); it != group.end(); ++it)
         {
@@ -21,21 +23,21 @@ public:
     }
 
 private:
-    std::vector<int> getPattern(const std::string &s)
+    // 移位s，使s的第一个字符变为'a'
+    std::string shift(const std::string &s)
     {
-        int len = s.size();
-        std::vector<int> pattern(len);
-        pattern[0] = 0;
-        for (int i = 1; i < len; ++i)
+        std::string res(s);
+        int delta = s[0] - 'a', len = s.size();
+        for (int i = 0; i < len; ++i)
         {
-            pattern[i] = s[i] - s[i - 1];
+            res[i] = (s[i] - 'a' + 26 - delta) % 26 + 'a';
         }
-        return pattern;
+        return res;
     }
 };
 
 int main()
 {
-    std::cout << "For Kirie" << std::endl;
+    Solution solution;
     return 0;
 }
