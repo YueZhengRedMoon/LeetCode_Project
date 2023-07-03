@@ -6,21 +6,16 @@ class Solution
 public:
     bool validWordSquare(std::vector<std::string> &words)
     {
-        int n = words.size();
-        for (int i = 0; i < n; ++i)
+        int row = words.size();
+        for (int i = 0; i < row; ++i)
         {
-            for (int j = 0; j < words[i].size(); ++j)
+            int col = words[i].size();
+            for (int j = 0; j < col; ++j)
             {
-                if (j >= words[i].size() && i < words[j].size())
+                if (j >= row || i >= words[j].size())
                     return false;
-                else if (i >= words[j].size() && j < words[i].size())
+                if (words[i][j] != words[j][i])
                     return false;
-                else if (j >= words[i].size() && i >= words[j].size())
-                    break;
-                else if (words[i][j] != words[j][i])
-                {
-                    return false;
-                }
             }
         }
         return true;
