@@ -113,3 +113,4 @@ add_executable(624_maximum-distance-in-arrays 624_maximum-distance-in-arrays.cpp
 add_executable(1100_find-k-length-substrings-with-no-repeated-characters 1100_find-k-length-substrings-with-no-repeated-characters.cpp)
 add_executable(249_group-shifted-strings 249_group-shifted-strings.cpp)
 add_executable(311_sparse-matrix-multiplication 311_sparse-matrix-multiplication.cpp)
+add_executable(723_candy-crush 723_candy-crush.cpp)
