@@ -41,6 +41,34 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    ListNode* plusOne(ListNode* head)
+    {
+        ListNode *sentinel = new ListNode(0, head);
+        ListNode *notNine = sentinel;
+
+        // 找到最右边的非9节点
+        while (head)
+        {
+            if (head->val != 9)
+                notNine = head;
+            head = head->next;
+        }
+
+        ++notNine->val;
+        notNine = notNine->next;
+        while (notNine)
+        {
+            notNine->val = 0;
+            notNine = notNine->next;
+        }
+
+        return sentinel->val != 0 ? sentinel : sentinel->next;
+    }
+};
+
 int main()
 {
     std::cout << "For Kirie!" << std::endl;
