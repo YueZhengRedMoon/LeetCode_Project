@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 #include "leetcode.h"
 
 class Solution
@@ -6,25 +7,33 @@ class Solution
 public:
     int closestValue(TreeNode* root, double target)
     {
-        if (root->val > target)
+        std::stack<TreeNode*> stack;
+        TreeNode *cur = root;
+        double minAbsDelta = 0x3f3f3f3f, delta = 0x3f3f3f3f;
+        while (cur || !stack.empty())
         {
-            if (root->left)
-                return closestValue(root->left, target);
-            else if (root->right)
-                return closestValue(root->right, target);
+            if (cur)
+            {
+                stack.push(cur);
+                cur = cur->left;
+            }
             else
-                return target;
-        }
-        else if (root->val < target)
-        {
-            if (root->right)
-                return closestValue(root->right, target);
+            {
+                cur = stack.top();
+                stack.pop();
 
+                double temp = std::abs(target - cur->val);
+                if (temp >= minAbsDelta)
+                {
+                    return target + delta;
+                }
+                minAbsDelta = temp;
+                delta = cur->val - target;
+
+                cur = cur->right;
+            }
         }
-        else
-        {
-            return root->val;
-        }
+        return target + delta;
     }
 };
 
