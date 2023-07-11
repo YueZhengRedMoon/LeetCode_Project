@@ -116,3 +116,4 @@ add_executable(311_sparse-matrix-multiplication 311_sparse-matrix-multiplication
 add_executable(723_candy-crush 723_candy-crush.cpp)
 add_executable(616_add-bold-tag-in-string 616_add-bold-tag-in-string.cpp)
 add_executable(16_3sum-closest 16_3sum-closest.cpp)
+add_executable(255_verify-preorder-sequence-in-binary-search-tree 255_verify-preorder-sequence-in-binary-search-tree.cpp)
