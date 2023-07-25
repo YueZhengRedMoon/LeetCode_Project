@@ -2,6 +2,7 @@
 #include <vector>
 #include <list>
 #include <unordered_set>
+#include <deque>
 
 class SnakeGame
 {
@@ -51,7 +52,7 @@ private:
     int w;
     int h;
     const std::vector<std::vector<int>> &food;
-    std::list<std::pair<int, int>> snake;
+    std::deque<std::pair<int, int>> snake;
     std::unordered_set<int> body;
     int i{0};
     int score{0};
