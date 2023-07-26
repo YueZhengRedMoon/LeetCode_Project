@@ -121,3 +121,4 @@ add_executable(1851_minimum-interval-to-include-each-query 1851_minimum-interval
 add_executable(918_maximum-sum-circular-subarray 918_maximum-sum-circular-subarray.cpp)
 add_executable(1060_missing-element-in-sorted-array 1060_missing-element-in-sorted-array.cpp)
 add_executable(2031_count-subarrays-with-more-ones-than-zeros 2031_count-subarrays-with-more-ones-than-zeros.cpp)
+add_executable(2500_delete-greatest-value-in-each-row 2500_delete-greatest-value-in-each-row.cpp)
