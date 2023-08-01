@@ -424,6 +424,139 @@ namespace kirie
         else
             kirie::nth_element(first, nth, left);
     }
+
+    class HeapBase
+    {
+    public:
+        HeapBase(int maxSize) : size(0), capacity(maxSize), heap(capacity) {}
+
+        bool isEmpty() const
+        {
+            return size <= 0;
+        }
+
+        virtual void push(int x) = 0;
+        virtual int pop() = 0;
+
+    protected:
+        int size;
+        int capacity;
+        std::vector<int> heap;
+    };
+
+    class MinHeap : public HeapBase
+    {
+    public:
+        MinHeap(int maxSize) : HeapBase(maxSize) {}
+
+        virtual void push(int x) override
+        {
+            // 自己节点的编号
+            int i = size++;
+            while (i > 0)
+            {
+                // 父节点的编号
+                int p = (i - 1) / 2;
+
+                // 如果已经符合小顶堆的要求，则退出
+                if (heap[p] <= x)
+                    break;
+
+                // 不满足小顶堆的要求，把父节点的值放下来，而把自己提上去
+                heap[i] = heap[p];
+                i = p;
+            }
+            heap[i] = x;
+        }
+
+        virtual int pop() override
+        {
+            // 堆顶最小值
+            int ret = heap[0];
+
+            // 要提到根的数值
+            int x = heap[--size];
+
+            // 从根开始向下交换
+            int i = 0;
+            while (i * 2 + 1 < size)
+            {
+                int left = i * 2 + 1, right = i * 2 + 2;
+                int min = left; // 左右孩子中的最小值
+                if (right < size && heap[right] < heap[left])
+                    min = right;
+
+                // 已经满足小顶堆的性质，退出
+                if (heap[min] >= x)
+                    break;
+
+                // 把子节点的值提上来
+                heap[i] = heap[min];
+                i = min;
+            }
+
+            heap[i] = x;
+            return ret;
+        }
+    };
+
+    class MaxHeap : public HeapBase
+    {
+    public:
+        MaxHeap(int maxSize) : HeapBase(maxSize) {}
+
+        virtual void push(int x) override
+        {
+            // 自己节点的编号
+            int i = size++;
+
+            while (i > 0)
+            {
+                // 父节点的编号
+                int p = (i - 1) / 2;
+
+                // 已经满足大顶堆的性质，退出
+                if (heap[p] >= x)
+                    break;
+
+                // 把父节点的数值放下来，而把自己提上去
+                heap[i] = heap[p];
+                i = p;
+            }
+
+            heap[i] = x;
+        }
+
+        virtual int pop() override
+        {
+            // 堆顶最大值
+            int ret = heap[0];
+
+            // 要提到根的数值
+            int x = heap[--size];
+
+            // 从根开始向下交换
+            int i = 0;
+            while (i * 2 + 1 < size)
+            {
+                int left = i * 2 + 1, right = i * 2 + 2;
+                int max = left; // 左右孩子中的最大值
+                if (right < size && heap[left] < heap[right])
+                    max = right;
+
+                // 已经满足大顶堆的性质，退出
+                if (heap[max] <= x)
+                    break;
+
+                // 把子节点的值提上来
+                heap[i] = heap[max];
+                i = max;
+            }
+            heap[i] = x;
+
+            return ret;
+        }
+    };
 }   // namespace kirie
 
 #endif //__LEET_CODE_PROJECT_ALGORITHM_H

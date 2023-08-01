@@ -7,12 +7,26 @@
 
 int main()
 {
-    std::vector<std::vector<int>> edges{{0, 2, 1}, {1, 2, 2}, {2, 3, 3}, {1, 4, 10}, {2, 5, 7}, {3, 5, 1},
-                                        {3, 6, 5}, {4, 5, 5}, {5, 6, 8}};
-    int edgeNum = 9;
-    int vertexNum = 7;
-    kirie::MinimumSpanningTree mst(edgeNum, vertexNum, edges);
-    int res = mst.prim(kirie::GraphMode::ADJ_LIST);
-    std::cout << res << std::endl;
+    std::vector<int> data{0,5,6,10,8,3,2,19,9,11};
+    int n = data.size();
+    kirie::MinHeap minHeap(n);
+    for (int num : data)
+    {
+        minHeap.push(num);
+    }
+    while (!minHeap.isEmpty())
+    {
+        std::cout << minHeap.pop() << std::endl;
+    }
+
+    kirie::MaxHeap maxHeap(n);
+    for (int num : data)
+    {
+        maxHeap.push(num);
+    }
+    while (!maxHeap.isEmpty())
+    {
+        std::cout << maxHeap.pop() << std::endl;
+    }
     return 0;
 }
