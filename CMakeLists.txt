@@ -124,3 +124,4 @@ add_executable(2031_count-subarrays-with-more-ones-than-zeros 2031_count-subarra
 add_executable(2500_delete-greatest-value-in-each-row 2500_delete-greatest-value-in-each-row.cpp)
 add_executable(281_zigzag-iterator 281_zigzag-iterator.cpp)
 add_executable(722_remove-comments 722_remove-comments.cpp)
+add_executable(2811_check-if-it-is-possible-to-split-array 2811_check-if-it-is-possible-to-split-array.cpp)
