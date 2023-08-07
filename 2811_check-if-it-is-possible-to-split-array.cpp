@@ -90,6 +90,25 @@ private:
     }
 };
 
+class Solution2
+{
+public:
+    bool canSplitArray(std::vector<int> &nums, int m)
+    {
+        int n = nums.size();
+        if (n <= 2)
+            return true;
+
+        for (int i = 1; i < n; ++i)
+        {
+            if (nums[i - 1] + nums[i] >= m)
+                return true;
+        }
+
+        return false;
+    }
+};
+
 int main()
 {
     Solution solution;
