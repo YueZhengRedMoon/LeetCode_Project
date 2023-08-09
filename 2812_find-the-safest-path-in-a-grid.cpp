@@ -6,6 +6,7 @@
 #include <forward_list>
 #include <functional>
 #include <numeric>
+#include "debug.h"
 
 class Solution
 {
@@ -44,6 +45,25 @@ public:
             while (it != queues.end())
             {
                 std::queue<Pair> &queue = *it;
+                int size = queue.size();
+                for (int i = 0; i < size; ++i)
+                {
+                    auto [x, y] = queue.front();
+                    queue.pop();
+                    int nextDis = dis[x][y] + 1;
+                    for (int i = 0; i < 4; ++i)
+                    {
+                        int nx = x + dir[i][0], ny = y + dir[i][1];
+                        if (0 <= nx && nx < n && 0 <= ny && ny < n && nextDis < dis[nx][ny])
+                        {
+                            dis[nx][ny] = nextDis;
+                            group[nextDis].emplace_front(nx, ny);
+                            queue.emplace(nx, ny);
+                            if (nextDis > maxDis)
+                                maxDis = nextDis;
+                        }
+                    }
+                }
                 if (queue.empty())
                 {
                     auto eraseIt = it;
@@ -52,21 +72,6 @@ public:
                 }
                 else
                 {
-                    auto [x, y] = queue.front();
-                    queue.pop();
-                    int nextDis = dis[x][y] + 1;
-                    for (int i = 0; i < 4; ++i)
-                    {
-                        int nx = x + dir[i][0], ny = y + dir[i][1];
-                        if (0 <= nx && x < n && 0 <= ny && ny < n && nextDis < dis[nx][ny])
-                        {
-                            queue.emplace(nx, ny);
-                            dis[nx][ny] = nextDis;
-                            if (dis[nx][ny] > maxDis)
-                                maxDis = dis[nx][ny];
-                            group[nextDis].emplace_front(nx, ny);
-                        }
-                    }
                     ++it;
                 }
             }
@@ -99,7 +104,8 @@ public:
             }
         };
 
-        for (int d = maxDis; d >= 0; --d)
+        Grid temp(n, std::vector<int>(n, 0));
+        for (int d = maxDis; d > 0; --d)
         {
             for (auto [x, y] : group[d])
             {
@@ -107,7 +113,7 @@ public:
                 for (int i = 0; i < 4; ++i)
                 {
                     int nx = x + dir[i][0], ny = y + dir[i][1];
-                    if (0 <= nx && x < n && 0 <= ny && ny < n && dis[x][y] <= dis[nx][ny])
+                    if (0 <= nx && nx < n && 0 <= ny && ny < n && dis[x][y] <= dis[nx][ny])
                     {
                         unite(idx, nx * n + ny);
                     }
@@ -123,6 +129,27 @@ public:
 
 int main()
 {
-    std::cout << "For Kirie" << std::endl;
+    Solution solution;
+    std::vector<std::vector<int>> grid = {{0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1},
+                                          {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1},
+                                          {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1},
+                                          {0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1},
+                                          {0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1},
+                                          {0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1},
+                                          {0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1},
+                                          {0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1},
+                                          {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
+                                          {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
+                                          {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                                          {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                          {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                          {1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                          {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                          {1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                          {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0},
+                                          {1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0},
+                                          {1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0}};
+    int ans = solution.maximumSafenessFactor(grid);
+    println(ans);
     return 0;
 }
