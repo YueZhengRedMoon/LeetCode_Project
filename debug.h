@@ -10,7 +10,9 @@
 #include <bitset>
 
 #define print(obj) std::cout << obj
-#define println(obj) std::cout << obj << std::endl;
+#define println(obj) std::cout << obj << std::endl
+#define logObj(obj) std::cout << #obj << " = " << obj << std::endl
+
 
 namespace debug
 {
@@ -25,7 +27,7 @@ namespace debug
     }
 
     template<typename T>
-    void printVector2D(std::vector<std::vector<T>> vector2D, char split = ' ')
+    void printVector2D(std::vector<std::vector<T>> vector2D, char split = ' ', char endLine = '\n')
     {
         for (const auto &vector : vector2D)
         {
@@ -33,7 +35,7 @@ namespace debug
             {
                 std::cout << value << split;
             }
-            std::cout << std::endl;
+            std::cout << endLine;
         }
     }
 
