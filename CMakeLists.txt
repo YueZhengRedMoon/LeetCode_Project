@@ -128,3 +128,4 @@ add_executable(2811_check-if-it-is-possible-to-split-array 2811_check-if-it-is-p
 add_executable(2812_find-the-safest-path-in-a-grid 2812_find-the-safest-path-in-a-grid.cpp)
 add_executable(2813_maximum-elegance-of-a-k-length-subsequence 2813_maximum-elegance-of-a-k-length-subsequence.cpp)
 add_executable(1351_count-negative-numbers-in-a-sorted-matrix 1351_count-negative-numbers-in-a-sorted-matrix.cpp)
+add_executable(2815_max-pair-sum-in-an-array 2815_max-pair-sum-in-an-array.cpp)
