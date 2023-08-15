@@ -593,6 +593,92 @@ namespace kirie
         }
     }
 
+    /** 求数组中任意区间内的最大值与最小值的线段树 */
+    template<typename T>
+    class MinMaxSegTree
+    {
+    public:
+        MinMaxSegTree(const std::vector<T> &arr) : size(arr.size()), tree(4 * size)
+        {
+            build(arr, 1, 0, size - 1);
+        }
+
+        // 返回值的first:arr[qLeft, qRight]中的最小值，返回值的second:arr[qLeft, qRight]中的最大值
+        std::pair<int, int> query(int qLeft, int qRight)
+        {
+            return query(1, 0, size - 1, qLeft, qRight);
+        }
+
+        void update(int index, const T &newVal)
+        {
+            update(1, 0, size - 1, index, newVal);
+        }
+
+    private:
+        // first:min, second:max
+        using Pair = std::pair<T, T>;
+
+        int size;
+        std::vector<Pair> tree;
+
+        void build(const std::vector<T> &arr, int idx, int left, int right)
+        {
+            if (left == right)
+            {
+                tree[idx].first = arr[left];
+                tree[idx].second = arr[left];
+                return;
+            }
+
+            int mid = (left + right) / 2, leftChild = 2 * idx, rightChild = 2 * idx + 1;
+            build(arr, leftChild, left, mid);
+            build(arr, rightChild, mid + 1, right);
+
+            tree[idx].first = std::min(tree[leftChild].first, tree[rightChild].first);
+            tree[idx].second = std::max(tree[leftChild].second, tree[rightChild].second);
+        }
+
+        Pair query(int idx, int left, int right, int qLeft, int qRight)
+        {
+            // 当前区间与查询区间不相交
+            if (left > qRight || right < qLeft)
+            {
+                return {std::numeric_limits<int>::max(), std::numeric_limits<int>::min()};
+            }
+
+            // 当前区间完全被查询区间包含
+            if (qLeft <= left && right <= qRight)
+            {
+                return tree[idx];
+            }
+
+            int mid = (left + right) / 2;
+            Pair leftRes = query(idx * 2, left, mid, qLeft, qRight);
+            Pair rightRes = query(idx * 2 + 1, mid + 1, right, qLeft, qRight);
+
+            return {std::min(leftRes.first, rightRes.first), std::max(leftRes.second, rightRes.second)};
+        }
+
+        void update(int idx, int left, int right, int index, const T &newVal)
+        {
+            if (left == right)
+            {
+                tree[idx].first = newVal;
+                tree[idx].second = newVal;
+                return;
+            }
+
+            int mid = (left + right) / 2, leftChild = 2 * idx, rightChild = 2 * idx + 1;
+            if (index <= mid)
+                update(leftChild, left, mid, index, newVal);
+            else
+                update(rightChild, mid + 1, right, index, newVal);
+
+            tree[idx].first = std::min(tree[leftChild].first, tree[rightChild].first);
+            tree[idx].second = std::max(tree[leftChild].second, tree[rightChild].second);
+        }
+    };
+
 }   // namespace kirie
 
 #endif //__LEET_CODE_PROJECT_ALGORITHM_H
