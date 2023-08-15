@@ -8,25 +8,7 @@
 int main()
 {
     std::vector<int> data{0,5,6,10,8,3,2,19,9,11};
-    int n = data.size();
-    kirie::MinHeap minHeap(n);
-    for (int num : data)
-    {
-        minHeap.push(num);
-    }
-    while (!minHeap.isEmpty())
-    {
-        std::cout << minHeap.pop() << std::endl;
-    }
-
-    kirie::MaxHeap maxHeap(n);
-    for (int num : data)
-    {
-        maxHeap.push(num);
-    }
-    while (!maxHeap.isEmpty())
-    {
-        std::cout << maxHeap.pop() << std::endl;
-    }
+    kirie::quickSort<int>(data, 0, data.size() - 1);
+    debug::printVector(data);
     return 0;
 }

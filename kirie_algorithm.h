@@ -557,6 +557,42 @@ namespace kirie
             return ret;
         }
     };
+
+    /** 快速排序算法 */
+    template<typename T>
+    int partition(std::vector<T> &arr, int low, int high)
+    {
+        int pivot = arr[(low + high) / 2];
+        int i = low - 1, j = high + 1;
+        while (true)
+        {
+            do
+            {
+                ++i;
+            } while (arr[i] < pivot);
+            do
+            {
+                --j;
+            } while (arr[j] > pivot);
+
+            if (i >= j)
+                return j;
+
+            std::swap(arr[i], arr[j]);
+        }
+    }
+
+    template<typename T>
+    void quickSort(std::vector<int> &arr, int low, int high)
+    {
+        if (low < high)
+        {
+            int pivotIndex = partition(arr, low, high);
+            quickSort<T>(arr, low, pivotIndex);
+            quickSort<T>(arr, pivotIndex + 1, high);
+        }
+    }
+
 }   // namespace kirie
 
 #endif //__LEET_CODE_PROJECT_ALGORITHM_H
