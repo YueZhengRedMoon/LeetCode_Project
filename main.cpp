@@ -7,19 +7,22 @@
 
 int main()
 {
-    std::vector<int> arr{0,5,6,10,8,3,2,19,9,11};
-    kirie::MinMaxSegTree segTree(arr);
-    logObj(arr.size());
-    int qLeft, qRight;
-    std::pair<int, int> res;
-
-    res = segTree.query(2, 7);
-    logObj(res.first);
-    logObj(res.second);
-
-    segTree.update(7, 7);
-    res = segTree.query(2, 7);
-    logObj(res.first);
-    logObj(res.second);
+    int n = 21;
+    std::vector<std::vector<int>> factors(n);
+    for (int i = 2; i < n; ++i)
+    {
+        if (factors[i].empty())
+        {
+            for (int j = i; j < n; j += i)
+            {
+                factors[j].push_back(i);
+            }
+        }
+    }
+    for (int i = 2; i < n; ++i)
+    {
+        std::cout << i << " : ";
+        debug::printVector(factors[i]);
+    }
     return 0;
 }
