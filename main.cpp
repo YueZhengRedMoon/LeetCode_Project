@@ -7,22 +7,9 @@
 
 int main()
 {
-    int n = 21;
-    std::vector<std::vector<int>> factors(n);
-    for (int i = 2; i < n; ++i)
-    {
-        if (factors[i].empty())
-        {
-            for (int j = i; j < n; j += i)
-            {
-                factors[j].push_back(i);
-            }
-        }
-    }
-    for (int i = 2; i < n; ++i)
-    {
-        std::cout << i << " : ";
-        debug::printVector(factors[i]);
-    }
+    std::vector<std::vector<int>> arr = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    kirie::MatrixSum arrSum(arr);
+    arrSum.printSum();
+    logObj(arrSum.query(0, 1, 2, 3));
     return 0;
 }

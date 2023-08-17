@@ -679,6 +679,53 @@ namespace kirie
         }
     };
 
+    /** 二维前缀和矩阵，用于求给定矩阵的任意子矩阵的所有元素的和 */
+    template<typename T>
+    class MatrixSum
+    {
+    public:
+        MatrixSum(const std::vector<std::vector<T>> &a)
+        : sum(a.size() + 1, std::vector<T>(a[0].size() + 1))
+        {
+            int m = a.size(), n = a[0].size();
+            for (int i = 0; i < m; ++i)
+            {
+                for (int j = 0; j < n; ++j)
+                {
+                    sum[i + 1][j + 1] = sum[i + 1][j] + sum[i][j + 1] - sum[i][j] + a[i][j];
+                }
+            }
+        }
+
+        /** 返回左上角在(r1, c1)，右下角在(r2-1, c2-1)的子矩阵的元素和（左闭右开） */
+        T query(int r1, int c1, int r2, int c2) const
+        {
+            return sum[r2][c2] - sum[r2][c1] - sum[r1][c2] + sum[r1][c1];
+        }
+
+        /** 返回左上角在(r1, c1)，右下角在(r2, c2)的子矩阵的元素和（左闭右闭） */
+        T query2(int r1, int c1, int r2, int c2) const
+        {
+            return sum[r2 + 1][c2 + 1] - sum[r2 + 1][c1] - sum[r1][c2 + 1] + sum[r1][c1];
+        }
+
+        void printSum()
+        {
+            for (int i = 0; i < sum.size(); ++i)
+            {
+                for (int j = 0; j < sum[i].size(); ++j)
+                {
+                    std::cout << sum[i][j] << " ";
+                }
+                std::cout << std::endl;
+            }
+        }
+
+    private:
+        // sum[i+1][j+1]:左上角为a[0][0],右下角为a[i][j]的子矩阵的元素和
+        std::vector<std::vector<T>> sum;
+    };
+
 }   // namespace kirie
 
 #endif //__LEET_CODE_PROJECT_ALGORITHM_H
