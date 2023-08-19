@@ -129,3 +129,4 @@ add_executable(2812_find-the-safest-path-in-a-grid 2812_find-the-safest-path-in-
 add_executable(2813_maximum-elegance-of-a-k-length-subsequence 2813_maximum-elegance-of-a-k-length-subsequence.cpp)
 add_executable(1351_count-negative-numbers-in-a-sorted-matrix 1351_count-negative-numbers-in-a-sorted-matrix.cpp)
 add_executable(2815_max-pair-sum-in-an-array 2815_max-pair-sum-in-an-array.cpp)
+add_executable(33_search-in-rotated-sorted-array 33_search-in-rotated-sorted-array.cpp)
