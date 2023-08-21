@@ -131,3 +131,4 @@ add_executable(1351_count-negative-numbers-in-a-sorted-matrix 1351_count-negativ
 add_executable(2815_max-pair-sum-in-an-array 2815_max-pair-sum-in-an-array.cpp)
 add_executable(33_search-in-rotated-sorted-array 33_search-in-rotated-sorted-array.cpp)
 add_executable(1514_path-with-maximum-probability 1514_path-with-maximum-probability.cpp)
+add_executable(2337_move-pieces-to-obtain-a-string 2337_move-pieces-to-obtain-a-string.cpp)
