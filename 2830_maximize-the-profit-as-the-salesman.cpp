@@ -25,10 +25,10 @@ public:
 
         for (int i = 1; i <= n; ++i)
         {
+            dp[i] = dp[i - 1];
             auto endMapIt = endMap.find(i);
             if (endMapIt != endMap.end())
             {
-                dp[i] = dp[i - 1];
                 for (int offerId : endMapIt->second)
                 {
                     dp[i] = std::max(dp[i], dp[offers[offerId][0] - 1] + offers[offerId][2]);
