@@ -133,3 +133,4 @@ add_executable(33_search-in-rotated-sorted-array 33_search-in-rotated-sorted-arr
 add_executable(1514_path-with-maximum-probability 1514_path-with-maximum-probability.cpp)
 add_executable(2337_move-pieces-to-obtain-a-string 2337_move-pieces-to-obtain-a-string.cpp)
 add_executable(2830_maximize-the-profit-as-the-salesman 2830_maximize-the-profit-as-the-salesman.cpp)
+add_executable(1782_count-pairs-of-nodes 1782_count-pairs-of-nodes.cpp)
