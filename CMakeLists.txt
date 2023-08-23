@@ -134,3 +134,4 @@ add_executable(1514_path-with-maximum-probability 1514_path-with-maximum-probabi
 add_executable(2337_move-pieces-to-obtain-a-string 2337_move-pieces-to-obtain-a-string.cpp)
 add_executable(2830_maximize-the-profit-as-the-salesman 2830_maximize-the-profit-as-the-salesman.cpp)
 add_executable(1782_count-pairs-of-nodes 1782_count-pairs-of-nodes.cpp)
+add_executable(1858_longest-word-with-all-prefixes 1858_longest-word-with-all-prefixes.cpp)
