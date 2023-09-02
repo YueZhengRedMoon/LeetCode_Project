@@ -136,3 +136,5 @@ add_executable(2830_maximize-the-profit-as-the-salesman 2830_maximize-the-profit
 add_executable(1782_count-pairs-of-nodes 1782_count-pairs-of-nodes.cpp)
 add_executable(1858_longest-word-with-all-prefixes 1858_longest-word-with-all-prefixes.cpp)
 add_executable(2539_count-the-number-of-good-subsequences 2539_count-the-number-of-good-subsequences.cpp)
+add_executable(1143_longest-common-subsequence 1143_longest-common-subsequence.cpp)
+add_executable(2511_maximum-enemy-forts-that-can-be-captured 2511_maximum-enemy-forts-that-can-be-captured.cpp)
