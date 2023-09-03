@@ -138,3 +138,4 @@ add_executable(1858_longest-word-with-all-prefixes 1858_longest-word-with-all-pr
 add_executable(2539_count-the-number-of-good-subsequences 2539_count-the-number-of-good-subsequences.cpp)
 add_executable(1143_longest-common-subsequence 1143_longest-common-subsequence.cpp)
 add_executable(2511_maximum-enemy-forts-that-can-be-captured 2511_maximum-enemy-forts-that-can-be-captured.cpp)
+add_executable(2834_find-the-minimum-possible-sum-of-a-beautiful-array 2834_find-the-minimum-possible-sum-of-a-beautiful-array.cpp)
