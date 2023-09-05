@@ -140,3 +140,4 @@ add_executable(1143_longest-common-subsequence 1143_longest-common-subsequence.c
 add_executable(2511_maximum-enemy-forts-that-can-be-captured 2511_maximum-enemy-forts-that-can-be-captured.cpp)
 add_executable(2834_find-the-minimum-possible-sum-of-a-beautiful-array 2834_find-the-minimum-possible-sum-of-a-beautiful-array.cpp)
 add_executable(449_serialize-and-deserialize-bst 449_serialize-and-deserialize-bst.cpp)
+add_executable(2836_maximize-value-of-function-in-a-ball-passing-game 2836_maximize-value-of-function-in-a-ball-passing-game.cpp)
