@@ -79,6 +79,39 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    int minOperations(std::vector<int> &nums, int target)
+    {
+        long long cnt[31]{};
+        long long sum = 0;
+        for (int num : nums)
+        {
+            sum += num;
+            ++cnt[__builtin_ctz(num)];
+        }
+
+        if (sum < target)
+            return -1;
+
+        int ans = 0, i = 0;
+        long long s = 0;
+        while ((1 << i) <= target)
+        {
+            s += cnt[i] << i;
+            int mask = (1ll << ++i) - 1;
+            if (s >= (target & mask))
+                continue;
+            ++ans;
+            for (; cnt[i] == 0; ++i)
+                ++ans;
+        }
+
+        return ans;
+    }
+};
+
 int main()
 {
     Solution solution;
