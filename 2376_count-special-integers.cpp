@@ -2,6 +2,7 @@
 #include <vector>
 #include <functional>
 
+// 数位DP
 class Solution
 {
 public:
