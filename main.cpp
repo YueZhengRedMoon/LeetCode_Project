@@ -8,24 +8,8 @@
 
 int main()
 {
-    std::string s = "abbcccdddd";
-
-    int cnt[26]{0};
-    int a = 1, b = 1;
-    for (int i = 0; i < s.size(); ++i)
-    {
-        a *= (i + 1);
-        b *= ++cnt[s[i] - 'a'];
-    }
-    logObj(a / b);
-
-    std::string cur(s);
-    std::unordered_set<std::string> set;
-    do
-    {
-        // logObj(cur);
-        set.insert(cur);
-    } while (std::next_permutation(cur.begin(), cur.end()));
-    logObj(set.size());
+    kirie::Matrix<int> m = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, n = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
+    kirie::Matrix<int> res = kirie::multiply(m, n);
+    debug::printVector2D(res);
     return 0;
 }

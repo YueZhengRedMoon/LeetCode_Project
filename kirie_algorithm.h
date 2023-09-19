@@ -726,6 +726,47 @@ namespace kirie
         std::vector<std::vector<T>> sum;
     };
 
+
+    template <typename T>
+    using Matrix = std::vector<std::vector<T>>;
+
+    // 矩阵乘法
+    template <typename T>
+    Matrix<T> multiply(const Matrix<T> &a, const Matrix<T> &b)
+    {
+        int m = a.size(), t = a.size(), n = a[0].size();
+        Matrix<T> res(m, std::vector<T>(n));
+        for (int i = 0; i < m; ++i)
+        {
+            for (int j = 0; j < n; ++j)
+            {
+                for (int k = 0; k < t; ++k)
+                    res[i][j] += a[i][k] * b[k][j];
+            }
+        }
+        return res;
+    }
+
+    // 矩阵快速幂
+    template <typename T>
+    Matrix<T> pow(Matrix<T> m, int n)
+    {
+        int size = m.size();
+        Matrix<T> res(size, std::vector<T>(size));
+        for (int i = 0; i < size; ++i)
+            m[i][i] = 1;
+
+        while (n)
+        {
+            if (n & 1)
+                res = multiply(res, m);
+            m = multiply(m, m);
+            n >>= 1;
+        }
+
+        return res;
+    }
+
 }   // namespace kirie
 
 #endif //__LEET_CODE_PROJECT_ALGORITHM_H
