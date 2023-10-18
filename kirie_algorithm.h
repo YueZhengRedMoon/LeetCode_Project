@@ -767,6 +767,49 @@ namespace kirie
         return res;
     }
 
+    // ---
+    // 原地堆化算法
+    // ---
+
+    // 把h[i]不断下沉，直到i的左右儿子都满足堆的性质
+    template <typename T, typename Comparator>
+    void sink(std::vector<T> &h, int i, Comparator comp)
+    {
+        int len = h.size();
+        while (2 * i + 1 < len)
+        {
+            // 找到最大或最小的子节点
+            int leftChild = 2 * i + 1, rightChild = 2 * i + 2;
+            int maxOrMinChild = leftChild;
+            if (rightChild < len && comp(h[leftChild], h[rightChild]))
+            {
+                maxOrMinChild = rightChild;
+            }
+            // 已经满足堆的性质
+            //  - 如果comp是less,则此处是!(h[i] < h[maxOrMinChild])，即h[i] >= h[maxOrMinChild]，大顶堆
+            //  - 如果comp是greater,则此处是!(h[i] > h[maxOrMinChild])，即h[i] <= h[maxOrMinChild]，小顶堆
+            if (!comp(h[i], h[maxOrMinChild]))
+                break;
+
+            std::swap(h[maxOrMinChild], h[i]);  // 下沉
+            i = maxOrMinChild;
+        }
+    }
+
+    // 原地堆化，堆化可以保证h[0]是堆顶元素，且h[i] >=/<= max(h[2*i+1], h[2*i+2])
+    // comp = less是大顶堆，comp = greater是小顶堆
+    template <typename T, typename Comparator>
+    void heapify(std::vector<T> &h, Comparator comp)
+    {
+        // 下标 >= h.length / 2的元素是二叉树的叶子，无需下沉
+        // 倒着遍历，从而保证i的左右子树一定是堆，那么sink(h, i)就可以把左右子树合并成一个堆
+        int len = h.size();
+        for (int i = len / 2 - 1; i >= 0; --i)
+        {
+            sink(h, i, comp);
+        }
+    }
+
 }   // namespace kirie
 
 #endif //__LEET_CODE_PROJECT_ALGORITHM_H

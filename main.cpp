@@ -8,8 +8,10 @@
 
 int main()
 {
-    kirie::Matrix<int> m = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, n = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
-    kirie::Matrix<int> res = kirie::multiply(m, n);
-    debug::printVector2D(res);
+    std::vector<int> nums = {9, 12, 6, 1, 4, 7, 8, 20, 3};
+    kirie::heapify(nums, std::less<>());
+    debug::printVector(nums);
+    kirie::heapify(nums, std::greater<>());
+    debug::printVector(nums);
     return 0;
 }
