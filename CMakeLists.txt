@@ -145,3 +145,4 @@ add_executable(449_serialize-and-deserialize-bst 1-499/449_serialize-and-deseria
 add_executable(2836_maximize-value-of-function-in-a-ball-passing-game 2500-2999/2836_maximize-value-of-function-in-a-ball-passing-game.cpp)
 add_executable(1094_car-pooling 1000-1499/1094_car-pooling.cpp)
 add_executable(2911_minimum-changes-to-make-k-semi-palindromes 2500-2999/2911_minimum-changes-to-make-k-semi-palindromes.cpp)
+add_executable(2558_take-gifts-from-the-richest-pile 2500-2999/2558_take-gifts-from-the-richest-pile.cpp)
