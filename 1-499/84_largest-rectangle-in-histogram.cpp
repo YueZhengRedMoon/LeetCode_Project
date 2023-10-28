@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stack>
 #include <vector>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

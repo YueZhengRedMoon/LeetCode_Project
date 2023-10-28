@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class MaxHeap
 {

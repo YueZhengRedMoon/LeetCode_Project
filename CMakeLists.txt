@@ -3,6 +3,8 @@ project(__Leet_Code_Project)
 
 set(CMAKE_CXX_STANDARD 17)
 
+include_directories(debug)
+
 add_executable(__Leet_Code_Project main.cpp)
 add_executable(145_binary-tree-postorder-traversal 1-499/145_binary-tree-postorder-traversal.cpp)
 add_executable(94_binary-tree-inorder-traversal 1-499/94_binary-tree-inorder-traversal.cpp)
@@ -142,3 +144,4 @@ add_executable(2834_find-the-minimum-possible-sum-of-a-beautiful-array 2500-2999
 add_executable(449_serialize-and-deserialize-bst 1-499/449_serialize-and-deserialize-bst.cpp)
 add_executable(2836_maximize-value-of-function-in-a-ball-passing-game 2500-2999/2836_maximize-value-of-function-in-a-ball-passing-game.cpp)
 add_executable(1094_car-pooling 1000-1499/1094_car-pooling.cpp)
+add_executable(2911_minimum-changes-to-make-k-semi-palindromes 2500-2999/2911_minimum-changes-to-make-k-semi-palindromes.cpp)

@@ -5,7 +5,7 @@
 #include <vector>
 #include <functional>
 #include "../leetcode.h"
-#include "../debug.h"
+#include "../debug/debug.h"
 
 constexpr int base = 128;
 char itoc[base];

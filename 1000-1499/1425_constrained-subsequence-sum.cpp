@@ -2,7 +2,7 @@
 #include <vector>
 #include <set>
 #include <deque>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

@@ -3,7 +3,7 @@
 #include <cstring>
 #include <queue>
 #include <limits>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 struct Node
 {

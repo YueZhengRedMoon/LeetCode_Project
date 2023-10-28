@@ -6,7 +6,7 @@
 #include <forward_list>
 #include <functional>
 #include <numeric>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

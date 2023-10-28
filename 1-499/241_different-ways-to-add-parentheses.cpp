@@ -2,7 +2,7 @@
 #include <vector>
 #include <unordered_set>
 #include <algorithm>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 /** 错误 */
 class Solution

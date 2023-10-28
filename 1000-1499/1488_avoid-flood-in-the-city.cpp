@@ -2,7 +2,7 @@
 #include <vector>
 #include <set>
 #include <unordered_map>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

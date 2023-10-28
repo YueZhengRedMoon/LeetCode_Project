@@ -3,7 +3,7 @@
 #include <limits>
 #include <algorithm>
 #include <set>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class SegmentTree
 {

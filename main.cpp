@@ -4,7 +4,7 @@
 #include <queue>
 #include <unordered_set>
 #include "kirie_algorithm.h"
-#include "debug.h"
+#include "debug/debug.h"
 
 int main()
 {

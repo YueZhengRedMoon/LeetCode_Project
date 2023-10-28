@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 /** 超时 */
 class Solution

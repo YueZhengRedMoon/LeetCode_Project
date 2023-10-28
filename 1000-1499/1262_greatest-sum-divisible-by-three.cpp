@@ -2,7 +2,7 @@
 #include <vector>
 #include <array>
 #include <limits>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <map>
 #include <numeric>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

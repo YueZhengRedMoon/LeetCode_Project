@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <queue>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

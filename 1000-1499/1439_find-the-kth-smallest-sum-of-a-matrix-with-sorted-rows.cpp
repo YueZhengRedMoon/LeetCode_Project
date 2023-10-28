@@ -2,7 +2,7 @@
 #include <vector>
 #include <queue>
 #include <algorithm>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 /** 错误，需要去重 */
 class Solution

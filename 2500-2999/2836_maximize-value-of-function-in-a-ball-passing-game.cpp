@@ -2,7 +2,7 @@
 #include <vector>
 #include <functional>
 #include <unordered_set>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

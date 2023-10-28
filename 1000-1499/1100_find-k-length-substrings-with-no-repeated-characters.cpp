@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

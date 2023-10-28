@@ -2,7 +2,7 @@
 #include <vector>
 #include <queue>
 #include <functional>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

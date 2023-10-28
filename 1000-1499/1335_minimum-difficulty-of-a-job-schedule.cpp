@@ -5,7 +5,7 @@
 #include <limits>
 #include <algorithm>
 #include <stack>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

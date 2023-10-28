@@ -3,7 +3,7 @@
 #include <functional>
 #include <queue>
 #include <unordered_set>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

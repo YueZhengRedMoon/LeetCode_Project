@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 /** 可以重新排列子串后再进行替换 */
 class Solution

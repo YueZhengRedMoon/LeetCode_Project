@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {

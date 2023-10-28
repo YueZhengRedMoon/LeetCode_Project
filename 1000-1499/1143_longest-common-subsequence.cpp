@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <bitset>
-#include "../debug.h"
+#include "../debug/debug.h"
 
 class Solution
 {
