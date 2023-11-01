@@ -146,3 +146,4 @@ add_executable(2836_maximize-value-of-function-in-a-ball-passing-game 2500-2999/
 add_executable(1094_car-pooling 1000-1499/1094_car-pooling.cpp)
 add_executable(2911_minimum-changes-to-make-k-semi-palindromes 2500-2999/2911_minimum-changes-to-make-k-semi-palindromes.cpp)
 add_executable(2558_take-gifts-from-the-richest-pile 2500-2999/2558_take-gifts-from-the-richest-pile.cpp)
+add_executable(2915_length-of-the-longest-subsequence-that-sums-to-target 2500-2999/2915_length-of-the-longest-subsequence-that-sums-to-target.cpp)
