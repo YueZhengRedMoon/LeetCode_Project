@@ -149,3 +149,4 @@ add_executable(2558_take-gifts-from-the-richest-pile 2500-2999/2558_take-gifts-f
 add_executable(2915_length-of-the-longest-subsequence-that-sums-to-target 2500-2999/2915_length-of-the-longest-subsequence-that-sums-to-target.cpp)
 add_executable(2258_escape-the-spreading-fire 2000-2499/2258_escape-the-spreading-fire.cpp)
 add_executable(765_couples-holding-hands 500-999/765_couples-holding-hands.cpp)
+add_executable(715_range-module 500-999/715_range-module.cpp)
