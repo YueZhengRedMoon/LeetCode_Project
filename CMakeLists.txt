@@ -150,4 +150,4 @@ add_executable(2915_length-of-the-longest-subsequence-that-sums-to-target 2500-2
 add_executable(2258_escape-the-spreading-fire 2000-2499/2258_escape-the-spreading-fire.cpp)
 add_executable(765_couples-holding-hands 500-999/765_couples-holding-hands.cpp)
 add_executable(715_range-module 500-999/715_range-module.cpp)
-add_executable(1334_find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance 1000-1499/1334_find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance.cpp)
+add_executable(2736_maximum-sum-queries 2500-2999/2736_maximum-sum-queries.cpp)
