@@ -151,3 +151,4 @@ add_executable(2258_escape-the-spreading-fire 2000-2499/2258_escape-the-spreadin
 add_executable(765_couples-holding-hands 500-999/765_couples-holding-hands.cpp)
 add_executable(715_range-module 500-999/715_range-module.cpp)
 add_executable(2736_maximum-sum-queries 2500-2999/2736_maximum-sum-queries.cpp)
+add_executable(689_maximum-sum-of-3-non-overlapping-subarrays 500-999/689_maximum-sum-of-3-non-overlapping-subarrays.cpp)
