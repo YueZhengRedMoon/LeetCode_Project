@@ -155,3 +155,4 @@ add_executable(689_maximum-sum-of-3-non-overlapping-subarrays 500-999/689_maximu
 add_executable(2216_minimum-deletions-to-make-array-beautifu 2000-2499/2216_minimum-deletions-to-make-array-beautifu.cpp)
 add_executable(2304_minimum-path-cost-in-a-grid 2000-2499/2304_minimum-path-cost-in-a-grid.cpp)
 add_executable(2824_count-pairs-whose-sum-is-less-than-target 2500-2999/2824_count-pairs-whose-sum-is-less-than-target.cpp)
+add_executable(1457_pseudo-palindromic-paths-in-a-binary-tree 1000-1499/1457_pseudo-palindromic-paths-in-a-binary-tree.cpp)
