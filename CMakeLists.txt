@@ -157,3 +157,4 @@ add_executable(2304_minimum-path-cost-in-a-grid 2000-2499/2304_minimum-path-cost
 add_executable(2824_count-pairs-whose-sum-is-less-than-target 2500-2999/2824_count-pairs-whose-sum-is-less-than-target.cpp)
 add_executable(1457_pseudo-palindromic-paths-in-a-binary-tree 1000-1499/1457_pseudo-palindromic-paths-in-a-binary-tree.cpp)
 add_executable(907_sum-of-subarray-minimums 500-999/907_sum-of-subarray-minimums.cpp)
+add_executable(1670_design-front-middle-back-queue 1500-1999/1670_design-front-middle-back-queue.cpp)
