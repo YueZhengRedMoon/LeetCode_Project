@@ -158,3 +158,4 @@ add_executable(2824_count-pairs-whose-sum-is-less-than-target 2500-2999/2824_cou
 add_executable(1457_pseudo-palindromic-paths-in-a-binary-tree 1000-1499/1457_pseudo-palindromic-paths-in-a-binary-tree.cpp)
 add_executable(907_sum-of-subarray-minimums 500-999/907_sum-of-subarray-minimums.cpp)
 add_executable(1670_design-front-middle-back-queue 1500-1999/1670_design-front-middle-back-queue.cpp)
+add_executable(2008_maximum-earnings-from-taxi 2000-2499/2008_maximum-earnings-from-taxi.cpp)
