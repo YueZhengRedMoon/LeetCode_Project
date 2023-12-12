@@ -4,6 +4,7 @@
 #include <queue>
 #include "../debug/debug.h"
 
+
 class Solution
 {
 public:
@@ -23,7 +24,7 @@ public:
 
             while (!stack.empty() && nums[i] > nums[stack.top()])
             {
-                queue.push(std::make_pair(nums[stack.top()], stack.top()));
+                queue.emplace(nums[stack.top()], stack.top());
                 stack.pop();
             }
 
