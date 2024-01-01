@@ -162,3 +162,4 @@ add_executable(2008_maximum-earnings-from-taxi 2000-2499/2008_maximum-earnings-f
 add_executable(2048_next-greater-numerically-balanced-number 2000-2499/2048_next-greater-numerically-balanced-number.cpp)
 add_executable(2132_stamping-the-grid 2000-2499/2132_stamping-the-grid.cpp)
 add_executable(2415_reverse-odd-levels-of-binary-tree 2000-2499/2415_reverse-odd-levels-of-binary-tree.cpp)
+add_executable(1599_maximum-profit-of-operating-a-centennial-wheel 1500-1999/1599_maximum-profit-of-operating-a-centennial-wheel.cpp)
