@@ -4,6 +4,7 @@
 class Solution
 {
 public:
+
     std::vector<int> divisibilityArray(std::string word, int m)
     {
         int n = word.size();
