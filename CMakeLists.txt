@@ -165,3 +165,4 @@ add_executable(2415_reverse-odd-levels-of-binary-tree 2000-2499/2415_reverse-odd
 add_executable(1599_maximum-profit-of-operating-a-centennial-wheel 1500-1999/1599_maximum-profit-of-operating-a-centennial-wheel.cpp)
 add_executable(2182_construct-string-with-repeat-limit 2000-2499/2182_construct-string-with-repeat-limit.cpp)
 add_executable(889_construct-binary-tree-from-preorder-and-postorder-traversal 500-999/889_construct-binary-tree-from-preorder-and-postorder-traversal.cpp)
+add_executable(2617_minimum-number-of-visited-cells-in-a-grid 2500-2999/2617_minimum-number-of-visited-cells-in-a-grid.cpp)
