@@ -98,6 +98,6 @@ int main()
     std::vector<std::vector<int>> grid = {{3,4,2,1},{4,2,3,1},{2,1,0,0},{2,4,0,0}};
     TimeLimit::Solution2 solution;
     int ans = solution.minimumVisitedCells(grid);
-    logObj(ans);
+    logObj(ans); 
     return 0;
 }
