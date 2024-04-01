@@ -1,6 +1,6 @@
 #include <iostream>
 #include <algorithm>
-
+#include <deque>
 
 class Solution
 {
@@ -21,6 +21,35 @@ public:
             }
         }
         return ans;
+    }
+};
+
+class Solution2
+{
+public:
+    std::string finalString(std::string s)
+    {
+        std::deque<char> deque;
+        bool addToBack = true, printFrontToBack = true;
+        for (char c : s)
+        {
+            if (c == 'i')
+            {
+                addToBack = !addToBack;
+                printFrontToBack = !printFrontToBack;
+            }
+            else
+            {
+                if (addToBack)
+                    deque.push_back(c);
+                else
+                    deque.push_front(c);
+            }
+        }
+        if (printFrontToBack)
+            return std::string(deque.begin(), deque.end());
+        else
+            return std::string(deque.rbegin(), deque.rend());
     }
 };
 
