@@ -34,13 +34,20 @@ int kmpSearch(const std::string &s, const std::string &t)
     int cmpCnt = 0;
     for (int i = 0, j = -1; i < sLen; ++i)
     {
-        while (j >= 0 && s[i] != t[j + 1])  // // 匹配失败
+        while (j >= 0)  // // 匹配失败
         {
-            j = next[j];                    // 回退到之前匹配的前缀的末尾
             ++cmpCnt;
+            if (s[i] != t[j + 1])
+            {
+                j = next[j];    // 回退到之前匹配的前缀的末尾
+            }
+            else
+            {
+                break;
+            }
         }
 
-        cmpCnt += 1;
+        ++cmpCnt;
         if (s[i] == t[j + 1])               // 匹配成功
         {
             ++j;                            // 准备判断模式串的下一个字符
