@@ -93,6 +93,64 @@ public:
     }
 };
 
+class Solution3
+{
+public:
+    int minimumDistance(std::vector<std::vector<int>>& points)
+    {
+        int maxXi, minXi, maxYi, minYi; // 最大，最小坐标的索引
+        int maxX1 = INT_MIN, maxX2 = INT_MIN, maxY1 = INT_MIN, maxY2 = INT_MIN; // x, y坐标转换后的最大值与次大值
+        int minX1 = INT_MAX, minX2 = INT_MAX, minY1 = INT_MAX, minY2 = INT_MAX; // x, y坐标转换后的最小值与次小值
+        for (int i = 0; i < points.size(); ++i)
+        {
+            int x = points[i][0] + points[i][1], y = points[i][0] - points[i][1];
+            updateMax(i, x, maxXi, maxX1, maxX2);
+            updateMax(i, y, maxYi, maxY1, maxY2);
+            updateMin(i, x, minXi, minX1, minX2);
+            updateMin(i, y, minYi, minY1, minY2);
+        }
+        int ans = INT_MAX;
+        for (int i : {maxXi, minXi, maxYi, minYi})
+        {
+            int dx = (i == maxXi ? maxX2 : maxX1) - (i == minXi ? minX2 : minX1);
+            int dy = (i == maxYi ? maxY2 : maxY1) - (i == minYi ? minY2 : minY1);
+            ans = std::min(ans, std::max(dx, dy));
+        }
+        return ans;
+    }
+
+private:
+    // 更新最大次大
+    void updateMax(int i, int v, int& maxI, int& max1, int& max2)
+    {
+        if (v > max1)
+        {
+            maxI = i;
+            max2 = max1;
+            max1 = v;
+        }
+        else if (v > max2)
+        {
+            max2 = v;
+        }
+    }
+
+    // 更新最小次小
+    void updateMin(int i, int v, int& minI, int& min1, int& min2)
+    {
+        if (v < min1)
+        {
+            minI = i;
+            min2 = min1;
+            min1 = v;
+        }
+        else if (v < min2)
+        {
+            min2 = v;
+        }
+    }
+};
+
 int main()
 {
     std::cout << "For Kirie!" << std::endl;
