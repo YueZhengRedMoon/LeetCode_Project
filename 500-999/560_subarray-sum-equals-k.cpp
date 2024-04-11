@@ -30,6 +30,25 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    int subarraySum(std::vector<int>& nums, int k)
+    {
+        std::unordered_map<int, int> prefixCounter({{0, 1}});
+        int n = nums.size(), ans = 0, prefix = 0;
+        for (int i = 0; i < n; ++i)
+        {
+            prefix += nums[i];
+            auto it = prefixCounter.find(prefix - k);
+            if (it != prefixCounter.end())
+                ans += it->second;
+            ++prefixCounter[prefix];
+        }
+        return ans;
+    }
+};
+
 int main()
 {
     std::cout << "For Kirie!" << std::endl;
