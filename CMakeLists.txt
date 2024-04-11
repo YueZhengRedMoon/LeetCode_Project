@@ -167,3 +167,4 @@ add_executable(2182_construct-string-with-repeat-limit 2000-2499/2182_construct-
 add_executable(889_construct-binary-tree-from-preorder-and-postorder-traversal 500-999/889_construct-binary-tree-from-preorder-and-postorder-traversal.cpp)
 add_executable(2617_minimum-number-of-visited-cells-in-a-grid 2500-2999/2617_minimum-number-of-visited-cells-in-a-grid.cpp)
 add_executable(2580_count-ways-to-group-overlapping-ranges 2500-2999/2580_count-ways-to-group-overlapping-ranges.cpp)
+add_executable(1766_tree-of-coprimes 1500-1999/1766_tree-of-coprimes.cpp)
