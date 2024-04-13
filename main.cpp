@@ -68,7 +68,7 @@ int kmpSearch(const std::string &s, const std::string &t)
 
 int main()
 {
-    std::string s = "abaabaabcabaabc", t = "abaabc";
+    std::string s = "adabadabra", t = "adabr";
     int cnt = kmpSearch(s, t);
     std::cout << cnt << std::endl;
     return 0;
