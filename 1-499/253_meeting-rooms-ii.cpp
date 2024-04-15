@@ -40,12 +40,12 @@ public:
                 maxEndTime = interval[1];
         }
 
-        std::vector<int> d(maxEndTime + 2, 0);  // 差分数组
+        std::vector<int> d(maxEndTime + 1, 0);  // 差分数组
         for (const auto& interval : intervals)
         {
             int start = interval[0], end = interval[1];
             ++d[start];
-            --d[end + 1];
+            --d[end];
         }
 
         int ans = d[0];
