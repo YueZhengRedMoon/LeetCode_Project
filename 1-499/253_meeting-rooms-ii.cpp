@@ -28,6 +28,38 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    int minMeetingRooms(std::vector<std::vector<int>> &intervals)
+    {
+        int maxEndTime = 0;
+        for (const auto& interval : intervals)
+        {
+            if (interval[1] > maxEndTime)
+                maxEndTime = interval[1];
+        }
+
+        std::vector<int> d(maxEndTime + 2, 0);  // 差分数组
+        for (const auto& interval : intervals)
+        {
+            int start = interval[0], end = interval[1];
+            ++d[start];
+            --d[end + 1];
+        }
+
+        int ans = d[0];
+        for (int i = 1; i <= maxEndTime; ++i)
+        {
+            d[i] += d[i - 1];
+            if (d[i] > ans)
+                ans = d[i];
+        }
+
+        return ans;
+    }
+};
+
 int main()
 {
     std::cout << "For Kirie!" << std::endl;
