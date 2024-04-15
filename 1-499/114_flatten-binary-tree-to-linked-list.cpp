@@ -1,5 +1,5 @@
 #include <iostream>
-#include "leetcode.h"
+#include "../leetcode.h"
 
 class Solution
 {
