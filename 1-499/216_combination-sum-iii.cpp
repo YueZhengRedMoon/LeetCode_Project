@@ -91,6 +91,55 @@ private:
     }
 };
 
+class Solution3
+{
+public:
+    std::vector<std::vector<int>> combinationSum3(int k, int n)
+    {
+        std::vector<std::vector<int>> ans;
+        if (n > 45)
+        {
+            // 1~9所有数加起来等于45，超过45的数无法表示
+            return ans;
+        }
+
+        gosperHack(9, k, n, ans);
+        return ans;
+    }
+
+private:
+    // Gosper's Hack算法，求出所有恰好有k个1的n位二进制数
+    void gosperHack(int n, int k, int target, std::vector<std::vector<int>>& ans)
+    {
+        int begin = (1 << k) - 1;
+        int end = begin << (n - k);
+        int x = begin;
+        while (x <= end)
+        {
+            int sum = 0;
+            std::vector<int> combination;
+            combination.reserve(k);
+            for (int i = 0; i < n; ++i)
+            {
+                if (x & (1 << i))
+                {
+                    combination.push_back(i + 1);
+                    sum += i + 1;
+                }
+            }
+            if (sum == target)
+            {
+                ans.push_back(std::move(combination));
+            }
+
+            int lb = x & -x;
+            int left = x + lb;
+            int right = (x ^ left) / lb >> 2;
+            x = left | right;
+        }
+    }
+};
+
 int main()
 {
     std::cout << "For Kirie!" << std::endl;
