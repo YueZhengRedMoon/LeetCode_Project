@@ -28,4 +28,3 @@ int main()
     std::cout << "For Kirie!" << std::endl;
     return 0;
 }
-172. 阶乘后的零
