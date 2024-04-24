@@ -57,6 +57,38 @@ public:
     }
 };
 
+class Solution3
+{
+public:
+    // 当将n拆分为3 * 3 * 3 * ... * r时，取得的乘积最大
+    int integerBreak(int n)
+    {
+        if (n <= 3)
+            return n - 1;
+        int r = n % 3;
+        if (r == 0)
+            return (int) quickPow(3, n / 3);
+        else if (r == 2)
+            return (int) quickPow(3, n / 3) * 2;
+        else
+            return (int) quickPow(3, n / 3 - 1) * 4;
+    }
+
+private:
+    long long quickPow(long long x, long long n)
+    {
+        long long res = 1;
+        while (n)
+        {
+            if (n & 1)
+                res *= x;
+            x *= x;
+            n >>= 1;
+        }
+        return res;
+    }
+};
+
 int main()
 {
     int n;
