@@ -80,5 +80,7 @@ int main()
 //    std::string s = "adabadabra", t = "adabr";
 //    int cnt = kmpSearch(s, t);
 //    std::cout << cnt << std::endl;
+    std::vector<int> a = {5, 4, 3, 2, 1};
+    std::prev_permutation(a.begin(), a.end());
     return 0;
 }

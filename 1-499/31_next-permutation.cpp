@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "../debug/debug.h"
 
 class Solution
 {
@@ -23,6 +24,20 @@ public:
         // 将a[i+1,n)的元素逆序
         std::reverse(a.begin() + i + 1, a.end());
     }
+
+    void prevPermutation(std::vector<int>& a)
+    {
+        int n = a.size();
+        int i;
+        for (i = n - 2; i >= 0 && a[i] <= a[i + 1]; --i);
+        if (i >= 0)
+        {
+            int j;
+            for (j = n - 1; j > i && a[i] <= a[j]; --j);
+            std::swap(a[i], a[j]);
+        }
+        std::reverse(a.begin() + i + 1, a.end());
+    }
 };
 
 int main()
@@ -30,5 +45,11 @@ int main()
     Solution solution;
     std::vector<int> nums = {1, 2, 3, 4, 5};
     solution.nextPermutation(nums);
+
+    std::vector<int> a1 = {1, 4, 2, 5, 3}, a2 = {1, 4, 2, 5, 3};
+    solution.prevPermutation(a1);
+    debug::printVector(a1);
+    std::prev_permutation(a2.begin(), a2.end());
+    debug::printVector(a2);
     return 0;
 }
