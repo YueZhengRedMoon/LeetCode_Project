@@ -66,10 +66,19 @@ int kmpSearch(const std::string &s, const std::string &t)
     return cnt;
 }
 
+unsigned char fun(unsigned char data)
+{
+    data = (data << 4) | (data >> 4);
+    data = ((data << 2) & 0xcc) | ((data >> 2) & 0x33);
+    data = ((data << 1) & 0xaa) | ((data >> 1) & 0x55);
+    return data;
+}
+
 int main()
 {
-    std::string s = "adabadabra", t = "adabr";
-    int cnt = kmpSearch(s, t);
-    std::cout << cnt << std::endl;
+    std::cout << (int) fun(209) << std::endl;
+//    std::string s = "adabadabra", t = "adabr";
+//    int cnt = kmpSearch(s, t);
+//    std::cout << cnt << std::endl;
     return 0;
 }
