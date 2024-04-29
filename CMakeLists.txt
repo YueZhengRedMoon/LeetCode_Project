@@ -170,3 +170,4 @@ add_executable(2580_count-ways-to-group-overlapping-ranges 2500-2999/2580_count-
 add_executable(1766_tree-of-coprimes 1500-1999/1766_tree-of-coprimes.cpp)
 add_executable(1052_grumpy-bookstore-owner 1000-1499/1052_grumpy-bookstore-owner.cpp)
 add_executable(31_next-permutation 1-499/31_next-permutation.cpp)
+add_executable(1329_sort-the-matrix-diagonally 1000-1499/1329_sort-the-matrix-diagonally.cpp)
