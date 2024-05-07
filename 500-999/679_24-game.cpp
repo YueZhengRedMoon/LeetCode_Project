@@ -14,7 +14,7 @@ public:
         {
             // 构造表达式
             for (int i = 0, j = 0; i < 4; ++i, j += 2)
-                expression[j] = cards[i];
+                expression[j] = cards[i] + '0';
             for (int op1 = 0; op1 < 4; ++op1)
             {
                 for (int op3 = 0; op3 < 4; ++op3)
@@ -56,22 +56,15 @@ private:
         for (int k = i + 2; k <= j; k += 2)
         {
             int x = expression[k] - '0';
-            switch (expression[k - 1])
-            {
-                case '+':
-                    a += b * x;
-                    break;
-                case '-':
-                    a -= b * x;
-                    break;
-                case '*':
-                    a *= x;
-                case '/':
-                    b *= x;
-                    break;
-                default:
-                    break;
-            }
+            char op = expression[k - 1];
+            if (op == '+')
+                a += b * x;
+            else if (op == '-')
+                a -= b * x;
+            else if (op == '*')
+                a *= x;
+            else
+                b *= x;
         }
         return {a, b};
     }
@@ -82,21 +75,24 @@ private:
         for (int k = j - 2; k >= i; k -= 2)
         {
             int x = expression[k] - '0';
-            switch (expression[k + 1])
+            char op = expression[k + 1];
+            if (op == '+')
             {
-                case '+':
-                    a += b * x;
-                    break;
-                case '-':
-                    a -= b * x;
-                    break;
-                case '*':
-                    a *= x;
-                case '/':
-                    b *= x;
-                    break;
-                default:
-                    break;
+                a += b * x;
+            }
+            else if (op == '-')
+            {
+                a = b * x - a;
+            }
+            else if (op == '*')
+            {
+                a *= x;
+            }
+            else
+            {
+                int temp = a;
+                a = b * x;
+                b = temp;
             }
         }
         return {a, b};
@@ -124,6 +120,9 @@ private:
 
 int main()
 {
-    std::cout << "For Kirie!" << std::endl;
+    Solution solution;
+    std::vector<int> cards = {1, 3, 4, 6};
+    bool ans = solution.judgePoint24(cards);
+    std::cout << std::boolalpha << ans << std::endl;
     return 0;
 }
