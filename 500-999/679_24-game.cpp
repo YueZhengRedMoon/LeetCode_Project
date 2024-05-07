@@ -40,7 +40,6 @@ public:
 private:
     bool check(const std::string& expr)
     {
-        // calc(calc(expr, 2, 4), calc(6, 6), expr[5])
         return  is24(calc(expr, 0, 6)) ||
                 is24(calc(calc(expr, 0, 0), calc(expr, 2, 6), expr[1])) ||
                 is24(calc(calc(expr, 0, 4), calc(expr, 6, 6), expr[5])) ||
