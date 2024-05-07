@@ -9,7 +9,7 @@ public:
     {
         int rows = grid.size(), cols = grid[0].size();
         // f[i][j1][j2]:机器人1到达grid[i][j1]，机器人2到达grid[i][j2]时能获得的最大樱桃数
-        std::vector<std::vector<std::vector<int>>> f(2, std::vector<std::vector<int>>(cols + 2, std::vector<int>(cols + 2, -1)));
+        std::vector<std::vector<std::vector<int>>> f(2, std::vector<std::vector<int>>(cols + 2, std::vector<int>(cols + 2, INT_MIN)));
         f[0][1][cols] = grid[0][0] + grid[0][cols - 1];
 
         for (int i = 1; i < rows; ++i)
@@ -19,7 +19,7 @@ public:
             {
                 for (int j2 = 1; j2 <= cols; ++j2)
                 {
-                    f[cur][j1][j2] = std::max({-1,
+                    f[cur][j1][j2] = std::max({
                                             f[last][j1 - 1][j2 - 1], f[last][j1 - 1][j2], f[last][j1 - 1][j2 + 1],
                                             f[last][j1][j2 - 1], f[last][j1][j2], f[last][j1][j2 + 1],
                                             f[last][j1 + 1][j2 - 1], f[last][j1 + 1][j2], f[last][j1 + 1][j2 + 1]
