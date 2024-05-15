@@ -172,3 +172,4 @@ add_executable(1052_grumpy-bookstore-owner 1000-1499/1052_grumpy-bookstore-owner
 add_executable(31_next-permutation 1-499/31_next-permutation.cpp)
 add_executable(1329_sort-the-matrix-diagonally 1000-1499/1329_sort-the-matrix-diagonally.cpp)
 add_executable(887_super-egg-drop 500-999/887_super-egg-drop.cpp)
+add_executable(879_profitable-schemes 500-999/879_profitable-schemes.cpp)
