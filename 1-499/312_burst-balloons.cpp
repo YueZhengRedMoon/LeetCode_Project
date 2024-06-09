@@ -87,31 +87,31 @@ private:
 /** 动态规划
  *  思路同Solution2
  * */
+
 class Solution3
 {
 public:
     int maxCoins(std::vector<int> &nums)
     {
-        int size = nums.size();
-        // dp[i][j]:填满开区间(i, j)所能获得的最大硬币数
-        std::vector<std::vector<int>> dp(size + 2, std::vector<int>(size + 2, 0));
+        int n = nums.size();
+        // f[i][j]:填充区间(i, j)能得到的最大硬币数
+        std::vector<std::vector<int>> f(n + 2, std::vector<int>(n + 2, 0));
 
-        std::vector<int> val(size + 2, 1);
+        std::vector<int> val(n + 2, 1);
         std::copy(nums.begin(), nums.end(), val.begin() + 1);
 
-        for (int i = size - 1; i >= 0; --i)
+        for (int i = n - 1; i >= 0; --i)
         {
-            for (int j = i + 2; j <= size + 1; ++j)
+            for (int j = i + 2; j <= n + 1; ++j)
             {
                 for (int k = i + 1; k < j; ++k)
                 {
-                    int sum = val[i] * val[k] * val[j] + dp[i][k] + dp[k][j];
-                    dp[i][j] = std::max(sum, dp[i][j]);
+                    f[i][j] = std::max(val[i] * val[k] * val[j] + f[i][k] + f[k][j], f[i][j]);
                 }
             }
         }
 
-        return dp[0][size + 1];
+        return f[0][n + 1];
     }
 };
 
