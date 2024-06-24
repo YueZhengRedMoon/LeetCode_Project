@@ -115,7 +115,12 @@ private:
                 }
             }
         }
-        return memo[key] = coverOne ? (bottom - top + 1) * (right - left + 1) : inf;
+        int res;
+        if (coverOne)
+            res = (bottom - top + 1) * (right - left + 1);
+        else
+            res = inf;
+        return memo[key] = res;
     }
 
     int hash(int a, int b, int c, int d)
