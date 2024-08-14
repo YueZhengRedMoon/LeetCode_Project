@@ -177,3 +177,4 @@ add_executable(1738_find-kth-largest-xor-coordinate-value 1500-1999/1738_find-kt
 add_executable(2028_find-missing-observations 2000-2499/2028_find-missing-observations.cpp)
 add_executable(2965_find-missing-and-repeated-values 2500-2999/2965_find-missing-and-repeated-values.cpp)
 add_executable(3171_find-subarray-with-bitwise-and-closest-to-k 3000-3499/3171_find-subarray-with-bitwise-and-closest-to-k.cpp)
+add_executable(3152_special-array-ii 3000-3499/3152_special-array-ii.cpp)
