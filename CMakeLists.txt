@@ -178,3 +178,4 @@ add_executable(2028_find-missing-observations 2000-2499/2028_find-missing-observ
 add_executable(2965_find-missing-and-repeated-values 2500-2999/2965_find-missing-and-repeated-values.cpp)
 add_executable(3171_find-subarray-with-bitwise-and-closest-to-k 3000-3499/3171_find-subarray-with-bitwise-and-closest-to-k.cpp)
 add_executable(3152_special-array-ii 3000-3499/3152_special-array-ii.cpp)
+add_executable(3177_find-the-maximum-length-of-a-good-subsequence-ii 3000-3499/3177_find-the-maximum-length-of-a-good-subsequence-ii.cpp)
