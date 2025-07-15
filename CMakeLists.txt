@@ -68,7 +68,7 @@ add_executable(11_container-with-most-water 1-499/11_container-with-most-water.c
 add_executable(6433_maximum-number-of-moves-in-a-grid 2500-2999/2684_maximum-number-of-moves-in-a-grid.cpp)
 add_executable(1335_minimum-difficulty-of-a-job-schedule 1000-1499/1335_minimum-difficulty-of-a-job-schedule.cpp)
 add_executable(1277_count-square-submatrices-with-all-ones 1000-1499/1277_count-square-submatrices-with-all-ones.cpp)
-add_executable(48_rotate-image 1-499/48_rotate-image.cpp)
+add_executable(48_rotate-imag0e 1-499/48_rotate-image.cpp)
 add_executable(219_contains-duplicate-ii 1-499/219_contains-duplicate-ii.cpp)
 add_executable(57_insert-interval 1-499/57_insert-interval.cpp)
 add_executable(1079_letter-tile-possibilities 1000-1499/1079_letter-tile-possibilities.cpp)
