@@ -12,7 +12,9 @@ public:
     {
         std::vector<std::unordered_set<int>> graph(n);
         std::vector<bool> isDivided(n, false);
-        std::vector<int> deg(n, 0);
+        std::vector<int> deg(n, 0); // deg[i]:节点[i]的度
+
+        // 建图(无向树)
         for (const std::vector<int> &edge : edges)
         {
             int u = edge[0], v = edge[1];
@@ -22,7 +24,7 @@ public:
             ++deg[v];
         }
 
-        std::vector<long long> compVal(n, 0); // compVal[v]:以为根节点的子树的连通块的值
+        std::vector<long long> compVal(n, 0); // compVal[v]:以v为根节点的子树的连通块的值
         std::queue<int> queue;
         for (int v = 0; v < n; ++v)
         {
