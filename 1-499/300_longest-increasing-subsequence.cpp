@@ -77,6 +77,31 @@ public:
     }
 };
 
+class Solution3
+{
+public:
+    int lengthOfLIS(std::vector<int> &nums)
+    {
+        int n = nums.size();
+        std::vector<int> f(n);  // f[i]:以nums[i]为结尾的最长递增子序列的长度
+        int ans = 1;
+        for (int i = 0; i < n; ++i)
+        {
+            f[i] = 1;
+            for (int j = 0; j < i; ++j)
+            {
+                if (nums[j] < nums[i])
+                {
+                    f[i] = std::max(f[i], f[j] + 1);
+                }
+            }
+            if (f[i] > ans)
+                ans = f[i];
+        }
+        return ans;
+    }
+};
+
 int main()
 {
     std::cout << "For Kirie!" << std::endl;
