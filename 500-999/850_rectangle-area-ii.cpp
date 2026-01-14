@@ -2,6 +2,41 @@
 #include <vector>
 #include <algorithm>
 
+/*
+struct Event
+{
+    int y;
+    int lx;     // 矩形左边的x坐标
+    int rx;     // 矩形右边的x坐标
+    int delta;
+
+    Event(int _y, int _lx, int _rx, int _delta) : y(_y), lx(_lx), rx(_rx), delta(_delta) {}
+};
+
+class Solution
+{
+public:
+    int rectangleArea(std::vector<std::vector<int>>& rectangles)
+    {
+        std::vector<int> xs;    // 所有矩形的左右两条边的横坐标集合
+
+        std::vector<Event> events;
+        for (const std::vector<int>& rect : rectangles)
+        {
+            int lx = rect[0], rx = rect[2];
+            xs.push_back(lx);
+            xs.push_back(rx);
+            events.emplace_back(rect[1], lx, rx, 1);    // 扫描线遇到矩形下边界，minCover+1
+            events.emplace_back(rect[3], lx, rx, -1);   // 扫描线遇到矩形上边界，minCover-1
+        }
+
+        // 排序去重，方便离散化
+        xs.erase(std::unique(xs.begin(), xs.end()), xs.end());
+    }
+};
+*/
+
+
 class Solution
 {
 public:
