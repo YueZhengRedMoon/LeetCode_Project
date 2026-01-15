@@ -1,8 +1,43 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 
 class Solution
+{
+public:
+    int longestConsecutive(std::vector<int>& nums)
+    {
+        std::unordered_set<int> set(nums.begin(), nums.end());  // 把nums转换成哈希集合
+        int ans = 0;
+        for (int x : set)   // 遍历哈希集合
+        {
+            if (set.find(x - 1) != set.end())   // 如果 x 不是序列的起点，直接跳过
+            {
+                continue;
+            }
+
+            // x 是序列的起点
+            int y = x + 1;
+            while (set.find(y) != set.end())    // 不断查找下一个数是否在哈希集合中
+            {
+                ++y;
+            }
+            // 循环结束后，y-1 是最后一个在哈希集合中的数
+            ans = std::max(ans, y - x); // 从 x 到 y-1 一共 y-x 个数
+
+            // 设 m 为 nums 中的不同元素个数（即哈希集合的大小）,各个连续序列（链）是互相独立的
+            // 如果我们发现其中一条链的长度至少为m/2，则不可能还有一条长度>m/2的链，答案不再会增大
+            if (ans * 2 >= set.size())
+            {
+                break;
+            }
+        }
+        return ans;
+    }
+};
+
+class MySolution
 {
 public:
     int longestConsecutive(std::vector<int> &nums)
