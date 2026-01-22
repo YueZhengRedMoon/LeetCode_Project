@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 class Solution
 {
@@ -36,6 +37,14 @@ public:
                     nums[i] = nums[i + 1];
                 }
                 ++ans;
+
+                // 打印移除最小数对后的nums数组
+                std::cout << '[';
+                for (int i = 0; i < n - 1; ++i)
+                {
+                    std::cout << nums[i] << ", ";
+                }
+                std::cout << nums[n - 1] << ']' << std::endl;
             }
         } while (!isAsc);
         return ans;
@@ -44,6 +53,23 @@ public:
 
 int main()
 {
-    std::cout << "For Kirie" << std::endl;
+    Solution solution;
+    std::vector<int> nums = {1, 2, 3, 4};
+    do
+    {
+        std::vector<int> numsCopy = nums;
+
+        // 打印nums数组
+        int n = numsCopy.size();
+        std::cout << '[';
+        for (int i = 0; i < n - 1; ++i)
+        {
+            std::cout << numsCopy[i] << ", ";
+        }
+        std::cout << numsCopy[n - 1] << ']' << std::endl;
+
+        int ans = solution.minimumPairRemoval(numsCopy);
+        std::cout << "ans = " << ans << '\n' << std::endl;
+    } while (std::next_permutation(nums.begin(), nums.end()));
     return 0;
 }
