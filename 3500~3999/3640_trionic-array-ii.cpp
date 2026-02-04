@@ -23,7 +23,7 @@ public:
             long long res = nums[peak - 1] + nums[peak];    // 第一段的最后两个数必选
             for (; i < n && nums[i - 1] > nums[i]; ++i)
             {
-                res += nums[i]; //  第二段的所有元素必选https://drive.google.com/file/d/1nTi2YK-O8BwF_6rBdC996f1CTDhVGHA8/view?usp=sharing
+                res += nums[i]; //  第二段的所有元素必选
             }
             if (i == peak + 1 || i == n || nums[i - 1] == nums[i])  // 第二段至少要有两个数，第三段至少要有两个数
             {
