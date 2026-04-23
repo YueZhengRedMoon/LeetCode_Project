@@ -55,7 +55,7 @@ public:
     }
 };
 
-class Solution3
+class Solution2
 {
 public:
     std::vector<long long> distance(std::vector<int> &nums)
@@ -86,6 +86,40 @@ public:
         }
 
         return result;
+    }
+};
+
+class Solution3
+{
+public:
+    std::vector<long long> distance(std::vector<int> &nums)
+    {
+        int n = nums.size();
+        std::unordered_map<int, std::vector<int>> groups;
+        for (int i = 0; i < n; ++i)
+        {
+            groups[nums[i]].push_back(i);
+        }
+
+        std::vector<long long> ans(n);
+        std::vector<long long> s(n + 1);
+        for (auto it = groups.begin(); it != groups.end(); ++it)
+        {
+            const std::vector<int>& a = it->second;
+            int m = a.size();
+            for (int i = 0; i < m; ++i)
+            {
+                s[i + 1] = s[i] + a[i]; // 前缀和
+            }
+            for (int i = 0; i < m; ++i)
+            {
+                long long target = a[i];
+                long long left = target * i - s[i];
+                long long right = s[m] - s[i] - target * (m - i);
+                ans[target] = left + right;
+            }
+        }
+        return ans;
     }
 };
 
