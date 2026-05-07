@@ -12,7 +12,7 @@ add_executable(144_binary-tree-preorder-traversal 1-499/144_binary-tree-preorder
 add_executable(102_binary-tree-level-order-traversal 1-499/102_binary-tree-level-order-traversal.cpp)
 add_executable(226_invert-binary-tree 1-499/226_invert-binary-tree.cpp)
 add_executable(589_n-ary-tree-preorder-traversal 500-999/589_n-ary-tree-preorder-traversal.cpp)
-add_executable(590_n-ary-tree-postorder-traversal 500-999/590_n-ary-tree-postorder-traversal.cpp)60
+add_executable(590_n-ary-tree-postorder-traversal 500-999/590_n-ary-tree-postorder-traversal.cpp)
 add_executable(77_combinations 1-499/77_combinations.cpp)
 add_executable(39_combination-sum 1-499/39_combination-sum.cpp)
 add_executable(62_unique-paths 1-499/62_unique-paths.cpp)
